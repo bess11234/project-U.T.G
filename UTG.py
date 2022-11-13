@@ -1,5 +1,5 @@
 """UTG"""
 def hii():
     """sdkjfoisu"""
-    print("Hello")
+    print("JOJO เฉย")
 hii()
