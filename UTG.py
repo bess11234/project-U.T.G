@@ -1,6 +1,5 @@
 """UTG"""
-def hii():
-    """sdkjfoisu"""
+def main_story():
+    """main story"""
     print("JOJO เฉย")
-    print('เพื่ออะไรครับ')
-hii()
+main_story()
