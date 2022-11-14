@@ -9,8 +9,9 @@ def power_mon(mon, stack):
     mon['int'] += stack
     mon['hp'] += mon['str']*5
     mon['mp'] += mon['int']*5
-def main():
-    """main story"""
+
+def inside_tower():
+    """tower"""
     
     print(st.random_mon,st.Monster[st.random_mon])
     stack_mon, stack_player = 0, 0
@@ -21,7 +22,7 @@ def main():
     status_player = st.Player.copy()
     power_mon(status_mon, stack_mon)
     power_player(status_player, stack_player)
-main()
+
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
 def main_story():
     """main story"""
