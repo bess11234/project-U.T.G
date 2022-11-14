@@ -18,4 +18,4 @@ def status():
         print(Tower, Point)
 status()
 #if Tower == (10 or 20 or 30 or 40 or 50):
-            #Point += 10 
+            #Point += 10
