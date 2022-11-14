@@ -1,6 +1,6 @@
 import random
 Player = {'hp': 10, 'mp': 10, 'str': 10, 'agi': 10, 'int': 10}
-Boss_random = ['Slime', 'Ant', 'Goblin', 'Orc', 'Lizard', 'Ancient Robot']
+Name_Boss_random = ['Slime', 'Ant', 'Goblin', 'Orc', 'Lizard', 'Ancient Robot']
 Monster = {'Slime': {'hp': 2, 'mp': 2, 'str': 1, 'agi': 2, 'int': 3},\
             'Ant': {'hp': 3, 'mp': 3, 'str': 2, 'agi': 4, 'int': 2},\
             'Goblin': {'hp': 9, 'mp': 7, 'str': 9, 'agi': 8, 'int': 10},\
@@ -10,7 +10,7 @@ Monster = {'Slime': {'hp': 2, 'mp': 2, 'str': 1, 'agi': 2, 'int': 3},\
 #while True:
     #if Player['hp'] == 0:
         #break
-print(Monster[random.choice(Boss_random)])
+Boss_random = Monster[random.choice(Name_Boss_random)]
 #เลือด
 #for i in Monster:
         #Monster[i]['hp'] += Monster[i]['str']*5
