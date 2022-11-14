@@ -7,9 +7,7 @@ Monster = {'Slime': {'hp': 2, 'mp': 2, 'str': 1, 'agi': 2, 'int': 3},\
             'Orc': {'hp': 15, 'mp': 10, 'str': 14, 'agi': 10, 'int': 15},\
             'Lizard': {'hp': 8, 'mp': 20, 'str': 7, 'agi': 19, 'int': 7},\
             'Ancient Robot': {'hp': 30, 'mp': 50, 'str': 25, 'agi': 15, 'int': 50}}
-#while True:
-    #if Player['hp'] == 0:
-        #break
+
 Boss_random = Monster[random.choice(Name_Boss_random)]
 #เลือด
 #for i in Monster:
