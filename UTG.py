@@ -1,3 +1,4 @@
+import status as st
 def power_player(status_player, stack_player):
     status_player['hp'] += stack_player
     status_player['hp'] += status_player['str']*5
