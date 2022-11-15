@@ -4,7 +4,7 @@ import tutorial as tu
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
 def point_player(point_player):
     while True:
-        print("จะอัพอะไร \n1 = str \n2 = int\n3 = agi\n4 = กลับไปหน้าหลัก")
+        print("จะอัพอะไร \n1 = str \n2 = agi\n3 = int\n4 = กลับไปหน้าหลัก")
         want_upgrade = input()
         if want_upgrade == "1":
             print("จะอัพกี่พอยต์ ? \n พิมพ์ OUT เพื่อกลับไปหน้าอัพสกิล")
@@ -19,7 +19,7 @@ def point_player(point_player):
             if spent_point != "out":
                 point_player(point_player)
             else:
-                st.Player['str'] += int(spent_point)
+                st.Player['agi'] += int(spent_point)
                 
 def power_player_items(status_player, weapon_status):
     status_player['str'] += weapon_status['str']
