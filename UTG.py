@@ -24,11 +24,11 @@ def power_mon(mon, stack, mon_type):
         mon['agi'] += mon['mp']*50//100 
         mon['int'] += mon['mp']*50//100 
     elif mon_type == "Miniboss":
-        mon += mon['hp']*25//100 
-        mon += mon['mp']*25//100 
-        mon += mon['str']*25//100 
-        mon += mon['agi']*25//100 
-        mon += mon['int']*25//100 
+        mon['hp'] += mon['hp']*25//100 
+        mon['mp'] += mon['mp']*25//100 
+        mon['str'] += mon['str']*25//100 
+        mon['agi'] += mon['agi']*25//100 
+        mon['int'] += mon['int']*25//100 
 def inside_tower(level, weapon_status, name):
     """tower"""
     print(level, weapon_status, name)
