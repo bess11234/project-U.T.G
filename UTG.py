@@ -28,7 +28,7 @@ def point_player(point_player):
             else:
                 st.Player['int'] += int(spent_point)
         elif want_upgrade == "4":
-            inside_tower(level, weapon_status, name)
+            return
                 
 def power_player_items(status_player, weapon_status):
     status_player['str'] += weapon_status['str']
