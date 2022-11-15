@@ -26,19 +26,7 @@ def re_item():
     random_rate = random.choice(rate_drop)
     random_drop = random.choice(weapon_drop)
     gain = weapon[random_drop]
-    if random_rate == "แย่":
-        gain["str"] += -1
-        gain["int"] += -1
-        gain["agi"] += -1
-    if random_rate == "ดีเยี่ยม":
-        gain["str"] += 5
-        gain["int"] += 5
-        gain["agi"] += 5
-    if random_rate == "ดีเยี่ยม":
-        gain["str"] *= 2
-        gain["int"] *= 2
-        gain["agi"] *= 2
-    return gain
+    return gain, random_rate, random_drop
 def rate_legend():
     """rate drop legendary waepon"""
     if random.randrange(10) == random.randrange(10):
