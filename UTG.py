@@ -22,7 +22,7 @@ def power_mon(mon, stack, mon_type):
         mon['mp'] += mon['mp']*50//100 
         mon['str'] += mon['mp']*50//100 
         mon['agi'] += mon['mp']*50//100 
-        mon['int'] += mon_type['mp']*50//100 
+        mon['int'] += mon['mp']*50//100 
     elif mon_type == "Miniboss":
         mon += mon['hp']*25//100 
         mon += mon['mp']*25//100 
