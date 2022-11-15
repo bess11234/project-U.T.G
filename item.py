@@ -3,16 +3,27 @@
 import random   
 """item in game Ultimate tower super ultra Character Galaxy of god"""
 rate_drop = ["แย่", "งั้นๆ", "งั้นๆ", "งั้นๆ", "งั้นๆ", "งั้นๆ", "ดีเยี่ยม", "ดีเยี่ยม", "ดีเยี่ยม", "ตำนานจนละเอียด"]
-drop = ["ดาบ", "สมุดเวท", "หอก", "ดาบยักษ์", "ดาบสามมือ"]
-weapon = {"ดาบ": {"str": 5, "int": 0, "agi": 3, "skill": ["ฟันตรง", "ยกชิดจ้วงแทง"]}, 
-              "สมุดเวท": {"str": 0, "int": 5, "agi": 3, "skill": ["เวทธาตุ", ""]}, 
-              "หอก": {"str": 6, "int": 0, "agi": 4, "skill": ["แทงตรง", ""]}, 
-              "เรเปีย": {"str": 6, "int": 0, "agi": 4, "skill": ["ยก" "ชิด", "จ้วง", "แทง"]},
-              "ดาบยักษ์": {"str": 10, "int": 0, "agi": -1, "skill": ["ฟันตรงแบบแรง!!!", ""]}, 
-              "ดาบสามมือ": {"str": 8, "int": 0, "agi": 5, "skill": ["ฟันสามต่อ", ""]}}
+potion_drop = ["Potion HP", "Potion MP"]
+legen_drop = ["กิ้งไม้แห่งสัจธรรม", "ไม้แขวนเสื้อที่ลุกโชน"]
+weapon_drop = ["ดาบ", "เรเปีย", "สมุดเวท", "หอก", "ดาบยักษ์", "ดาบสามมือ"]
+
+weapon_legendary = {"กิ้งไม้แห่งสัจธรรม":{"str": 0, "int": 1000, "agi": 20, "skill":{"ความจริงมีเพียงหนึ่งเดียว!!!"}}, 
+                    "ไม้แขวนเสื้อที่ลุกโชน":{"str": 0, "int": 1000, "agi": 20, "skill":{"ไปกรอกน้ำเดี๋ยวนี้!!!"}}}
+weapon = {"ดาบ": {"str": 5, "int": 0, "agi": 3, "skill": {"ฟันตรง", "ยกชิดจ้วงแทง"}}, 
+              "หอก": {"str": 6, "int": 0, "agi": 4, "skill": {"แทงตรง", ""}}, 
+              "เรเปีย": {"str": 3, "int": 0, "agi": 9, "skill": {"ยก" "ชิด", "จ้วง", "แทง"}},
+              "ดาบยักษ์": {"str": 10, "int": 0, "agi": -1, "skill": {"ฟันตรงแบบแรง!!!", ""}}, 
+              "ดาบสามมือ": {"str": 8, "int": 0, "agi": 5, "skill": {"ฟันสามต่อ", ""}}, 
+              "สมุดเวทย์": {"str": 0, "int": 5, "agi": 3, "skill": {"ลูกบอลไฟ", ""}}, 
+              "คฑาเวทย์": {"str": 0, "int": 10, "agi": -1, "skill": {"ลมเฉือน", ""}}, 
+              "ตะเกียงเวทย์": {"str": 0, "int": 7, "agi": 1, "skill": {"เวทแห่งแสง", ""}}, 
+              " ไม้กายสิทธิ์": {"str": 0, "int": 6, "agi": 7, "skill": {"เอสเปรสโซ่ปลาโตนุ่ม", "อะวาคาดาบรา"}}, 
+              "ระเบิดเวทย์": {"str": 0, "int": 8, "agi": 5, "skill": {"แฟลชแบง", ""}},}
+
 def re_item():
+    """rate drop item"""
     random_rate = random.choice(rate_drop)
-    random_drop = random.choice(drop)
+    random_drop = random.choice(weapon_drop)
     gain = weapon[random_drop]
     if random_rate == "แย่":
         gain["str"] += -1
@@ -27,3 +38,9 @@ def re_item():
         gain["int"] *= 2
         gain["agi"] *= 2
     return gain
+def rate_legend():
+    """rate drop legendary waepon"""
+    rate_1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    rate_2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    if random.choice(rate_1) == random.choice(rate_2):
+        random.choice(legen_drop)
