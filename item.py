@@ -9,16 +9,20 @@ weapon = {"ดาบ": {"str": 5, "int": 0, "agi": 3, "skill": ["ฟันตร
               "หอก": {"str": 6, "int": 0, "agi": 4, "skill": ["แทงตรง", "ยกชิดจ้วงแทง"]}, 
               "ดาบยักษ์": {"str": 10, "int": 0, "agi": -1, "skill": ["ฟันตรงแบบแรง!!!", ""]}, 
               "ดาบสามมือ": {"str": 8, "int": 0, "agi": 5, "skill": ["ฟันสามต่อ", ""]}}
-        
-random_rate = random.choice(rate_drop)
-random_drop = random.choice(drop)
-if random_rate == "แย่":
-    add = (-1, -1, -1)
-if random_rate == "ดีเยี่ยม":
-    add = (5, 5, 5)
-if random_rate == "ดีเยี่ยม":
-    add = (*2, *2, *2)
-gain = weapon[random_drop]
-gain["str"] += add[0]
-gain["int"] += add[1]
-gain["agi"] += add[2]
+def re_item():
+    random_rate = random.choice(rate_drop)
+    random_drop = random.choice(drop)
+    gain = weapon[random_drop]
+    if random_rate == "แย่":
+        gain["str"] += -1
+        gain["int"] += -1
+        gain["agi"] += -1
+    if random_rate == "ดีเยี่ยม":
+        gain["str"] += 5
+        gain["int"] += 5
+        gain["agi"] += 5
+    if random_rate == "ดีเยี่ยม":
+        gain["str"] *= 2
+        gain["int"] *= 2
+        gain["agi"] *= 2
+    return gain
