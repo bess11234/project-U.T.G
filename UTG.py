@@ -121,6 +121,7 @@ def inside_tower(level, weapon_status, name, weapon_rate):
 
         print("""พบเจอมอนเตอร์ %s แล้ว!!\nHP : \t%d\n"""%(mon, status_mon["hp"]))
         
+        point_player = upgrade_pointplayer(point_player)
 
         level += 1
         point_player += 5
