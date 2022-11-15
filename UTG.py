@@ -14,14 +14,14 @@ def upgrade_pointplayer(point_player):
             else:
                 upgrade_pointplayer(point_player)
         elif want_upgrade == "2":
-            print("จะอัพกี่พอยต์ ? \n พิมพ์ OUT เพื่อกลับไปหน้าอัพสกิล")
+            print("จะอัพกี่พอยต์ ? \n พิมพ์ Back เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input().lower()
             if spent_point.isdecimal():
                 st.Player['str'] += int(spent_point)
             else:
                 upgrade_pointplayer(point_player)
         elif want_upgrade == "3":
-            print("จะอัพกี่พอยต์ ? \n พิมพ์ OUT เพื่อกลับไปหน้าอัพสกิล")
+            print("จะอัพกี่พอยต์ ? \n พิมพ์ Back เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input().lower()
             if spent_point.isdecimal():
                 st.Player['str'] += int(spent_point)
