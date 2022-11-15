@@ -20,6 +20,15 @@ def point_player(point_player):
                 point_player(point_player)
             else:
                 st.Player['agi'] += int(spent_point)
+        elif want_upgrade == "3":
+            print("จะอัพกี่พอยต์ ? \n พิมพ์ OUT เพื่อกลับไปหน้าอัพสกิล")
+            spent_point = input().lower()
+            if spent_point != "out":
+                point_player(point_player)
+            else:
+                st.Player['int'] += int(spent_point)
+        elif want_upgrade == "4":
+            inside_tower(level, weapon_status, name)
                 
 def power_player_items(status_player, weapon_status):
     status_player['str'] += weapon_status['str']
