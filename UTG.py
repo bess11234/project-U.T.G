@@ -2,7 +2,7 @@ import status as st
 import item as it
 import tutorial as tu
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
-def point_player(point_player):
+def upgrade_pointplayer(point_player):
     while True:
         print("จะอัพอะไร \n1 = str \n2 = agi\n3 = int\n4 = กลับไปหน้าหลัก")
         want_upgrade = input()
@@ -29,6 +29,8 @@ def point_player(point_player):
                 st.Player['int'] += int(spent_point)
         elif want_upgrade == "4":
             return
+        else:
+            upgrade_pointplayer(point_player)
                 
 def power_player_items(status_player, weapon_status):
     status_player['str'] += weapon_status['str']
