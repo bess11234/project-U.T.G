@@ -7,23 +7,23 @@ def point_player(point_player):
         print("จะอัพอะไร \n1 = str \n2 = agi\n3 = int\n4 = กลับไปหน้าหลัก")
         want_upgrade = input()
         if want_upgrade == "1":
-            print("จะอัพกี่พอยต์ ? \n พิมพ์ OUT เพื่อกลับไปหน้าอัพสกิล")
+            print("จะอัพกี่พอยต์ ? \n พิมพ์ Back เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input().lower()
-            if spent_point != "out":
+            if spent_point != "back":
                 point_player(point_player)
             else:
                 st.Player['str'] += int(spent_point)
         elif want_upgrade == "2":
             print("จะอัพกี่พอยต์ ? \n พิมพ์ OUT เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input().lower()
-            if spent_point != "out":
+            if spent_point != "back":
                 point_player(point_player)
             else:
                 st.Player['agi'] += int(spent_point)
         elif want_upgrade == "3":
             print("จะอัพกี่พอยต์ ? \n พิมพ์ OUT เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input().lower()
-            if spent_point != "out":
+            if spent_point != "back":
                 point_player(point_player)
             else:
                 st.Player['int'] += int(spent_point)
