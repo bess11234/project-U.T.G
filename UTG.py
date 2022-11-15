@@ -4,7 +4,7 @@ import tutorial as tu
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
 def upgrade_pointplayer(point_player):
     while True:
-        print("จะอัพอะไร \n1 = str \n2 = agi\n3 = int\n4 = กลับไปหน้าหลัก")
+        print("Point : %d\nกรุณาเลือกค่าที่จะอัพ \n1 = str \n2 = agi\n3 = int\n4 = กลับไปหน้าหลัก"%point_player)
         want_upgrade = input()
         if want_upgrade == "1":
             print("จะอัพกี่พอยต์ ? \n พิมพ์ Back เพื่อกลับไปหน้าอัพสกิล")
@@ -13,6 +13,7 @@ def upgrade_pointplayer(point_player):
                 st.Player['str'] += int(spent_point)
             else:
                 upgrade_pointplayer(point_player)
+
         elif want_upgrade == "2":
             print("จะอัพกี่พอยต์ ? \n พิมพ์ Back เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input().lower()
@@ -20,6 +21,7 @@ def upgrade_pointplayer(point_player):
                 st.Player['agi'] += int(spent_point)
             else:
                 upgrade_pointplayer(point_player)
+
         elif want_upgrade == "3":
             print("จะอัพกี่พอยต์ ? \n พิมพ์ Back เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input().lower()
@@ -27,12 +29,33 @@ def upgrade_pointplayer(point_player):
                 st.Player['int'] += int(spent_point)
             else:
                 upgrade_pointplayer(point_player)
+
         elif want_upgrade == "4":
             return
+
         else:
             upgrade_pointplayer(point_player)
-                
-def power_player_items(status_player, weapon_status):
+
+def power_player_items(status_player, weapon_status, weapon_rate, stack_weapon):
+    weapon_status['str'] += stack_weapon
+    weapon_status['int'] += stack_weapon
+    weapon_status['agi'] += stack_weapon
+
+    if weapon_rate == "แย่":
+        weapon_status["str"] += -1
+        weapon_status["int"] += -1
+        weapon_status["agi"] += -1
+
+    if weapon_rate == "ดีเยี่ยม":
+        weapon_status["str"] += 5
+        weapon_status["int"] += 5
+        weapon_status["agi"] += 5
+
+    if weapon_rate == "ดีเยี่ยม":
+        weapon_status["str"] *= 2
+        weapon_status["int"] *= 2
+        weapon_status["agi"] *= 2
+
     status_player['str'] += weapon_status['str']
     status_player['int'] += weapon_status['int']
     status_player['agi'] += weapon_status['agi']
@@ -41,50 +64,61 @@ def power_player(status_player, stack_player, weapon_status):
     status_player['hp'] += stack_player
     status_player['hp'] += status_player['str']*5 - weapon_status['str']*5
     status_player['mp'] += status_player['int']*5 - weapon_status['int']*5
-    
+
 def power_mon(mon, stack, mon_type):
     mon['str'] += stack
     mon['int'] += stack
     mon['hp'] += mon['str']*5
     mon['mp'] += mon['int']*5
+
     if mon_type == "Superboss":
-        mon['hp'] += mon['hp']*50//100 
-        mon['mp'] += mon['mp']*50//100 
-        mon['str'] += mon['str']*50//100 
-        mon['agi'] += mon['agi']*50//100 
-        mon['int'] += mon['int']*50//100 
+        mon['hp'] += mon['hp']*50//100
+        mon['mp'] += mon['mp']*50//100
+        mon['str'] += mon['str']*50//100
+        mon['agi'] += mon['agi']*50//100
+        mon['int'] += mon['int']*50//100
+
     elif mon_type == "Miniboss":
-        mon['hp'] += mon['hp']*25//100 
-        mon['mp'] += mon['mp']*25//100 
-        mon['str'] += mon['str']*25//100 
-        mon['agi'] += mon['agi']*25//100 
-        mon['int'] += mon['int']*25//100 
-def inside_tower(level, weapon_status, name):
+        mon['hp'] += mon['hp']*25//100
+        mon['mp'] += mon['mp']*25//100
+        mon['str'] += mon['str']*25//100
+        mon['agi'] += mon['agi']*25//100
+        mon['int'] += mon['int']*25//100
+
+def inside_tower(level, weapon_status, name, weapon_rate):
     """tower"""
-    print(level, weapon_status, name)
-    stack_mon, stack_player = 0, 0
+    stack_mon, stack_player, stack_weapon = 0, 0, 0
     player_item = {"HP potion" : 0, "MP potion" : 0}
     point_player = 0
 
     while level != 50:
-        it.re_item()
+        if level != 0:
+            weapon_status, weapon_rate, weapon_name = it.re_item()
         mon_type = ""
         mon = st.re_mon() #สุ่มมอนที่จะสู้
         stack_mon += 1 + level//10 #ถ้าจะฟาร์มต่อจะไม่บวกเพิ่ม
         stack_player += 5
+        stack_weapon += weapon_status 
 
         if level%10 == 0 and level != 0:
             mon_type = "Superboss"
         elif level%5 == 0 and level != 0:
             mon_type = "Miniboss"
+        if level%10 == 1 and level != 1:
+            for i in st.Monster:
+                st.Monster[i]["agi"] += 10
+            point_player += 10
+
         status_mon = st.Monster[mon].copy()
         status_player = st.Player.copy()
-        power_player_items(status_player, weapon_status)
+
+        power_player_items(status_player, weapon_status, weapon_rate, stack_weapon)
         power_mon(status_mon, stack_mon, mon_type)
         power_player(status_player, stack_player, weapon_status)
 
         print("""พบเจอมอนเตอร์ %s แล้ว!!\nHP : \t%d\n"""%(mon, status_mon["hp"]))
-            
+        
+
         level += 1
         point_player += 5
 
@@ -97,9 +131,9 @@ def tower(object, choice, name):
         object = it.weapon["สมุดเวทย์"].copy()
 
     if choice == "2":
-        tu.tutorial(level, object, name)
+        tu.tutorial(level, object, name, "งั้นๆ")
     else:
-        inside_tower(level, object, name)
+        inside_tower(level, object, name, "งั้นๆ")
 
 def main_story():
     """main story"""
