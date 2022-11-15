@@ -64,7 +64,7 @@ def tower(object, choice, name):
     if object == "ดาบเก่าๆ":
         object = it.weapon["ดาบ"].copy()
     if object == "สมุดเวทย์ผุๆ":
-        object = it.weapon["สมุดเวท"].copy()
+        object = it.weapon["สมุดเวทย์"].copy()
 
     if choice == "2":
         tu.tutorial(level, object, name)
