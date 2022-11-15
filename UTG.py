@@ -63,7 +63,7 @@ def tower(object, choice, name):
     level = 0
     if object == "ดาบเก่าๆ":
         object = it.weapon["ดาบ"].copy()
-    if object == "สมุดเวทผุๆ":
+    if object == "สมุดเวทย์ผุๆ":
         object = it.weapon["สมุดเวท"].copy()
 
     if choice == "2":
@@ -78,14 +78,14 @@ def main_story():
 โลกก็ได้เข้าสู่ยุคสมัยของผู้กล้า ทุกคนต่างรวมตัวกันเพื่อที่จะทำลายหอคอย\n""")
     #เลือกอาวุธ
     print("ท่านอยากใช้สิ่งใดเป็นอาวุธ")
-    print("1 ดาบเก่าๆ, 2 สมุดเวทผุๆ")
+    print("1 ดาบเก่าๆ, 2 สมุดเวทย์ผุๆ")
     while True:
         choice = input("กรุณาเลือกอาวุธ : ")
         if choice == "1":
             weapon = "ดาบเก่าๆ"
             break
         elif choice == "2":
-            weapon = "สมุดเวทผุๆ"
+            weapon = "สมุดเวทย์ผุๆ"
             break
         else:
             print("เฮ้ นั้นมันไม่ใช่อาวุธที่นายมีอยู่นะ!!!")
