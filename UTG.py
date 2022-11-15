@@ -2,6 +2,18 @@ import status as st
 import item as it
 import tutorial as tu
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
+def point_player(point_player):
+    while True:
+        print("จะอัพอะไร \n1 = str \n2 = int\n3 = agi")
+        want_upgrade = input()
+        if want_upgrade == "1":
+            print("จะอัพกี่พอยต์ ? \n พิมพ์ OUT เพื่อกลับไปหน้าอัพสกิล")
+            spent_point = input().lower()
+            if spent_point != "out":
+                return
+            else:
+                st.Player['str'] += int(spent_point)
+                
 def power_player_items(status_player, weapon_status):
     status_player['str'] += weapon_status['str']
     status_player['int'] += weapon_status['int']
@@ -53,8 +65,14 @@ def inside_tower(level, weapon_status, name):
         power_mon(status_mon, stack_mon, mon_type)
         power_player(status_player, stack_player, weapon_status)
 
-        print("""พบเจอมอนเตอร์ %s แล้ว!!\nHP : \t%d\n"""%(mon, status_mon["hp"]))    
-
+        print("""พบเจอมอนเตอร์ %s แล้ว!!\nHP : \t%d\n"""%(mon, status_mon["hp"]))
+            
+        if point_player != 0: #จะเข้าไปอัพPointมั้ย
+            print("อยากจะอัพพอยต์มั้ย\n YES OR NO")
+            want_uppoint = input().lower()
+            if want_uppoint == "yes":
+                point_player(point_player)
+                
         level += 1
         point_player += 5
 
