@@ -11,6 +11,7 @@ def upgrade_pointplayer(point_player):
             spent_point = input().lower()
             if spent_point.isdecimal():
                 st.Player['str'] += int(spent_point)
+                point_player -= int(spent_point)
             else:
                 upgrade_pointplayer(point_player)
 
@@ -19,6 +20,7 @@ def upgrade_pointplayer(point_player):
             spent_point = input().lower()
             if spent_point.isdecimal():
                 st.Player['agi'] += int(spent_point)
+                point_player -= int(spent_point)
             else:
                 upgrade_pointplayer(point_player)
 
@@ -27,11 +29,12 @@ def upgrade_pointplayer(point_player):
             spent_point = input().lower()
             if spent_point.isdecimal():
                 st.Player['int'] += int(spent_point)
+                point_player -= int(spent_point)
             else:
                 upgrade_pointplayer(point_player)
 
         elif want_upgrade == "4":
-            return
+            return point_player
 
         else:
             upgrade_pointplayer(point_player)
