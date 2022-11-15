@@ -12,12 +12,23 @@ def power_player(status_player, stack_player, weapon_status):
     status_player['hp'] += status_player['str']*5 - weapon_status['str']*5
     status_player['mp'] += status_player['int']*5 - weapon_status['int']*5
     
-def power_mon(mon, stack):
+def power_mon(mon, stack, mon_type):
     mon['str'] += stack
     mon['int'] += stack
     mon['hp'] += mon['str']*5
     mon['mp'] += mon['int']*5
-
+    if mon_type == "Superboss":
+        mon_type['hp'] += mon_type['hp']*50//100 
+        mon_type['mp'] += mon_type['mp']*50//100 
+        mon_type['str'] += mon_type['mp']*50//100 
+        mon_type['agi'] += mon_type['mp']*50//100 
+        mon_type['int'] += mon_type['mp']*50//100 
+    elif mon_type == "Miniboss":
+        mon_type += mon_type['hp']*25//100 
+        mon_type += mon_type['mp']*25//100 
+        mon_type += mon_type['str']*25//100 
+        mon_type += mon_type['agi']*25//100 
+        mon_type += mon_type['int']*25//100 
 def inside_tower(level, weapon_status, name):
     """tower"""
     print(level, weapon_status, name)
@@ -27,17 +38,19 @@ def inside_tower(level, weapon_status, name):
 
     while level != 50:
         it.re_item()
+        mon_type = ""
         mon = st.re_mon() #สุ่มมอนที่จะสู้
         stack_mon += 1 + level//10 #ถ้าจะฟาร์มต่อจะไม่บวกเพิ่ม
         stack_player += 5
 
         if level%10 == 0 and level != 0:
-            #สร้างตัวแปรเก็บว่าเป็นบอส
-            pass
+            mon_type = "Superboss"
+        elif level%5 == 0 and level != 0:
+            mon_type = "Miniboss"
         status_mon = st.Monster[mon].copy()
         status_player = st.Player.copy()
         power_player_items(status_player, weapon_status)
-        power_mon(status_mon, stack_mon)
+        power_mon(status_mon, stack_mon, mon_type)
         power_player(status_player, stack_player, weapon_status)
 
         print("""พบเจอมอนเตอร์ %s แล้ว!!\nHP : \t%d\n"""%(mon, status_mon["hp"]))    
