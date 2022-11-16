@@ -2,7 +2,7 @@ import status as st
 import item as it
 import tutorial as tu
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
-def choice(status_player, point_player, player_item):
+def choices_upgrade(status_player, point_player, player_item):
     while True:
         print("จะกลับไปสู้ต่อหรือไม่ ? \n1 = สู้ต่อ\n2 = เปิดไอเทม\n3 = อัพพ๊อยต์ \n4 = ออก")
         select = input()
@@ -19,7 +19,7 @@ def choice(status_player, point_player, player_item):
                     status_player['mp'] += status_player['mp']*20//100 
                     player_item['MP potion'] -= 1
                 elif use == "3":
-                    choice(status_player, point_player, player_item)
+                    choices_upgrade(status_player, point_player, player_item)
                 else:
                     print("คุณป้อนผิด")
         elif select == "3":
@@ -27,8 +27,8 @@ def choice(status_player, point_player, player_item):
         elif select == "4":
             return point_player
         else:
-            choice(status_player, point_player, player_item)
-def upgrade_pointplayer(point_player,status_player ):
+            choices_upgrade(status_player, point_player, player_item)
+def upgrade_pointplayer(point_player, status_player):
     while True:
         print("HP =\t%d\nMP =\t%d\nSTR =\t%d\nAGI =\t%d\nINT =\t%d"%(status_player['hp'],status_player['mp'],st.Player['str'],st.Player['agi'],st.Player['int']))#ถ้าอัพค่าใดค่าหนึ่งแล้วค่านั้นจะมีผลเลย
         print("Point : %d\nกรุณาเลือกค่าที่จะอัพ \n1 = str \n2 = agi\n3 = int\n4 = กลับไปหน้าหลัก"%point_player)
@@ -40,7 +40,7 @@ def upgrade_pointplayer(point_player,status_player ):
                 st.Player['str'] += int(spent_point)
                 point_player -= int(spent_point)
             else:
-                upgrade_pointplayer(point_player)
+                upgrade_pointplayer(point_player, status_player)
 
         elif want_upgrade == "2":
             print("จะอัพกี่พอยต์ ? \n พิมพ์ Back เพื่อกลับไปหน้าอัพสกิล")
@@ -49,7 +49,7 @@ def upgrade_pointplayer(point_player,status_player ):
                 st.Player['agi'] += int(spent_point)
                 point_player -= int(spent_point)
             else:
-                upgrade_pointplayer(point_player)
+                upgrade_pointplayer(point_player, status_player)
 
         elif want_upgrade == "3":
             print("จะอัพกี่พอยต์ ? \n พิมพ์ Back เพื่อกลับไปหน้าอัพสกิล")
@@ -58,13 +58,13 @@ def upgrade_pointplayer(point_player,status_player ):
                 st.Player['int'] += int(spent_point)
                 point_player -= int(spent_point)
             else:
-                upgrade_pointplayer(point_player)
+                upgrade_pointplayer(point_player, status_player)
 
         elif want_upgrade == "4":
             return point_player
 
         else:
-            upgrade_pointplayer(point_player)
+            upgrade_pointplayer(point_player, status_player)
 
 def power_player_items(status_player, weapon_status, weapon_rate, stack_weapon):
     weapon_status['str'] += stack_weapon
@@ -142,7 +142,7 @@ def inside_tower(level, weapon_status, name):
         status_mon = st.Monster[mon].copy()
         status_player = st.Player.copy()
         
-        choice(status_player, point_player, player_item)
+        choices_upgrade(status_player, point_player, player_item)
 
         power_player_items(status_player, weapon_status, weapon_rate, stack_weapon)
         power_mon(status_mon, stack_mon, mon_type)
