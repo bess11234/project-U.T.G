@@ -63,8 +63,8 @@ def power_player_items(status_player, weapon_status, weapon_rate, stack_weapon):
     status_player['int'] += weapon_status['int']
     status_player['agi'] += weapon_status['agi']
 
-def power_player(status_player, stack_player, weapon_status):
-    status_player['hp'] += stack_player
+def power_player(status_player, weapon_status):
+    st.Player["hp"] += 5
     status_player['hp'] += status_player['str']*5 - weapon_status['str']*5
     status_player['mp'] += status_player['int']*5 - weapon_status['int']*5
 
@@ -90,7 +90,7 @@ def power_mon(mon, stack, mon_type):
 
 def inside_tower(level, weapon_status, name, weapon_rate):
     """tower"""
-    stack_mon, stack_player, stack_weapon = 0, 0, 0
+    stack_mon, stack_weapon = 0, 0
     player_item = {"HP potion" : 0, "MP potion" : 0}
     point_player = 0
 
@@ -100,8 +100,7 @@ def inside_tower(level, weapon_status, name, weapon_rate):
         mon_type = ""
         mon = st.re_mon() #สุ่มมอนที่จะสู้
         stack_mon += 1 + level//10 #ถ้าจะฟาร์มต่อจะไม่บวกเพิ่ม
-        stack_player += 5
-        stack_weapon += weapon_status 
+        stack_weapon += 1
 
         if level%10 == 0 and level != 0:
             mon_type = "Superboss"
@@ -114,14 +113,14 @@ def inside_tower(level, weapon_status, name, weapon_rate):
 
         status_mon = st.Monster[mon].copy()
         status_player = st.Player.copy()
+        
+        point_player = upgrade_pointplayer(point_player)
 
         power_player_items(status_player, weapon_status, weapon_rate, stack_weapon)
         power_mon(status_mon, stack_mon, mon_type)
-        power_player(status_player, stack_player, weapon_status)
+        power_player(status_player, weapon_status)
 
         print("""พบเจอมอนเตอร์ %s แล้ว!!\nHP : \t%d\n"""%(mon, status_mon["hp"]))
-        
-        point_player = upgrade_pointplayer(point_player)
 
         level += 1
         point_player += 5

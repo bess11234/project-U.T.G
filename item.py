@@ -28,6 +28,7 @@ def re_item():
     random_drop = random.choice(weapon_drop)
     gain = weapon[random_drop]
     return gain, random_rate, random_drop
+
 def rate_legend():
     """rate drop legendary waepon"""
     if random.randrange(10) == random.randrange(10):
