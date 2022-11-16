@@ -2,6 +2,32 @@ import status as st
 import item as it
 import tutorial as tu
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
+def choice(status_player, point_player, player_item):
+    while True:
+        print("จะกลับไปสู้ต่อหรือไม่ ? \n1 = สู้ต่อ\n2 = เปิดไอเทม\n3 = อัพพ๊อยต์ \n4 = ออก")
+        select = input()
+        if select == "1":
+            return
+        elif select == "2":
+            while True:
+                print("จะเลือกใช้อะไร 1 = HP Potion:\t%d\n2 = MP:\t%d\n3 = กลับ")%(player_item['HP potion'], player_item['MP potion'])
+                use = input()
+                if use == "1" and player_item['HP potion'] != 0:
+                    status_player['hp'] += status_player['hp']*25//100
+                    player_item['HP potion'] -= 1
+                elif use == "2" and player_item['MP potion'] != 0:
+                    status_player['mp'] += status_player['mp']*20//100 
+                    player_item['MP potion'] -= 1
+                elif use == "3":
+                    choice(status_player, point_player, player_item)
+                else:
+                    print("คุณป้อนผิด")
+        elif select == "3":
+            pointplayer = upgrade_pointplayer(point_player)
+        elif select == "4":
+            return point_player
+        else:
+            choice(status_player, point_player, player_item)
 def upgrade_pointplayer(point_player):
     while True:
         print("Point : %d\nกรุณาเลือกค่าที่จะอัพ \n1 = str \n2 = agi\n3 = int\n4 = กลับไปหน้าหลัก"%point_player)
@@ -96,6 +122,8 @@ def inside_tower(level, weapon_status, name):
     point_player = 0
 
     while level != 50:
+        if point_player != 0:
+            choice()
         if level != 0:
             weapon_status, weapon_rate, weapon_name = it.re_item()#สุ่มไอเทม
         mon_type = ""
