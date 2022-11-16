@@ -96,7 +96,7 @@ def inside_tower(level, weapon_status, name, weapon_rate):
 
     while level != 50:
         if level != 0:
-            weapon_status, weapon_rate, weapon_name = it.re_item()
+            weapon_status, weapon_rate, weapon_name = it.re_item()#สุ่มไอเทม
         mon_type = ""
         mon = st.re_mon() #สุ่มมอนที่จะสู้
         stack_mon += 1 + level//10 #ถ้าจะฟาร์มต่อจะไม่บวกเพิ่ม
@@ -135,9 +135,9 @@ def tower(object, choice, name):
         object = it.weapon["สมุดเวทย์"].copy()
 
     if choice == "2":
-        tu.tutorial(level, object, name, "งั้นๆ")
+        tu.tutorial(level, object, name)
     else:
-        inside_tower(level, object, name, "งั้นๆ")
+        inside_tower(level, object, name)
 
 def main_story():
     """main story"""
