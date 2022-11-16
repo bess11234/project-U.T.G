@@ -10,7 +10,7 @@ def choice(status_player, point_player, player_item):
             return
         elif select == "2":
             while True:
-                print("จะเลือกใช้อะไร 1 = HP Potion:\t%d\n2 = MP:\t%d\n3 = กลับ")%(player_item['HP potion'], player_item['MP potion'])
+                print("จะเลือกใช้อะไร 1 = HP Potion:\t%d\n2 = MP:\t%d\n3 = กลับ"%(player_item['HP potion'], player_item['MP potion']))
                 use = input()
                 if use == "1" and player_item['HP potion'] != 0:
                     status_player['hp'] += status_player['hp']*25//100
@@ -23,13 +23,14 @@ def choice(status_player, point_player, player_item):
                 else:
                     print("คุณป้อนผิด")
         elif select == "3":
-            pointplayer = upgrade_pointplayer(point_player)
+            pointplayer = upgrade_pointplayer(point_player,status_player )
         elif select == "4":
             return point_player
         else:
             choice(status_player, point_player, player_item)
-def upgrade_pointplayer(point_player):
+def upgrade_pointplayer(point_player,status_player ):
     while True:
+        print("HP =\t%d\nMP =\t%d\nSTR =\t%d\nAGI =\t%d\nINT =\t%d"%(status_player['hp'],status_player['mp'],st.Player['str'],st.Player['agi'],st.Player['int']))#ถ้าอัพค่าใดค่าหนึ่งแล้วค่านั้นจะมีผลเลย
         print("Point : %d\nกรุณาเลือกค่าที่จะอัพ \n1 = str \n2 = agi\n3 = int\n4 = กลับไปหน้าหลัก"%point_player)
         want_upgrade = input()
         if want_upgrade == "1":
@@ -122,8 +123,6 @@ def inside_tower(level, weapon_status, name):
     point_player = 0
 
     while level != 50:
-        if point_player != 0:
-            choice()
         if level != 0:
             weapon_status, weapon_rate, weapon_name = it.re_item()#สุ่มไอเทม
         mon_type = ""
@@ -143,7 +142,7 @@ def inside_tower(level, weapon_status, name):
         status_mon = st.Monster[mon].copy()
         status_player = st.Player.copy()
         
-        point_player = upgrade_pointplayer(point_player)
+        choice(status_player, point_player, player_item)
 
         power_player_items(status_player, weapon_status, weapon_rate, stack_weapon)
         power_mon(status_mon, stack_mon, mon_type)
