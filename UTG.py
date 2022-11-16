@@ -2,7 +2,7 @@ import status as st
 import item as it
 import tutorial as tu
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
-def choices_upgrade(status_player, point_player, player_item):
+def choices_wantupgrade(status_player, point_player, player_item):
     while True:
         print("จะกลับไปสู้ต่อหรือไม่ ? \n1 = สู้ต่อ\n2 = เปิดไอเทม\n3 = อัพพ๊อยต์ \n4 = ออก")
         select = input()
@@ -19,7 +19,7 @@ def choices_upgrade(status_player, point_player, player_item):
                     status_player['mp'] += status_player['mp']*20//100 
                     player_item['MP potion'] -= 1
                 elif use == "3":
-                    choices_upgrade(status_player, point_player, player_item)
+                    choices_wantupgrade(status_player, point_player, player_item)
                 else:
                     print("คุณป้อนผิด")
         elif select == "3":
@@ -27,7 +27,7 @@ def choices_upgrade(status_player, point_player, player_item):
         elif select == "4":
             return point_player
         else:
-            choices_upgrade(status_player, point_player, player_item)
+            choices_wantupgrade(status_player, point_player, player_item)
 def upgrade_pointplayer(point_player, status_player):
     while True:
         print("HP =\t%d\nMP =\t%d\nSTR =\t%d\nAGI =\t%d\nINT =\t%d"%(status_player['hp'],status_player['mp'],st.Player['str'],st.Player['agi'],st.Player['int']))#ถ้าอัพค่าใดค่าหนึ่งแล้วค่านั้นจะมีผลเลย
@@ -142,7 +142,7 @@ def inside_tower(level, weapon_status, name):
         status_mon = st.Monster[mon].copy()
         status_player = st.Player.copy()
         
-        choices_upgrade(status_player, point_player, player_item)
+        choices_wantupgrade(status_player, point_player, player_item)
 
         power_player_items(status_player, weapon_status, weapon_rate, stack_weapon)
         power_mon(status_mon, stack_mon, mon_type)
