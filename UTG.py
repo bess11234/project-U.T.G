@@ -134,9 +134,9 @@ def tower(object, choice, name):
         object = it.weapon["สมุดเวทย์"].copy()
 
     if choice == "2":
-        tu.tutorial(level, object, name)
+        tu.tutorial(level, object, name, "งั้นๆ")
     else:
-        inside_tower(level, object, name)
+        inside_tower(level, object, name, "งั้นๆ")
 
 def main_story():
     """main story"""
