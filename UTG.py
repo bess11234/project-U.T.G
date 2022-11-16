@@ -88,8 +88,9 @@ def power_mon(mon, stack, mon_type):
         mon['agi'] += mon['agi']*25//100
         mon['int'] += mon['int']*25//100
 
-def inside_tower(level, weapon_status, name, weapon_rate):
+def inside_tower(level, weapon_status, name):
     """tower"""
+    weapon_rate = ""
     stack_mon, stack_weapon = 0, 0
     player_item = {"HP potion" : 0, "MP potion" : 0}
     point_player = 0
@@ -134,9 +135,9 @@ def tower(object, choice, name):
         object = it.weapon["สมุดเวทย์"].copy()
 
     if choice == "2":
-        tu.tutorial(level, object, name, "งั้นๆ")
+        tu.tutorial(level, object, name)
     else:
-        inside_tower(level, object, name, "งั้นๆ")
+        inside_tower(level, object, name)
 
 def main_story():
     """main story"""
