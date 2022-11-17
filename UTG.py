@@ -370,6 +370,9 @@ def main_story():
             break
         elif choice == "uuddlrlrab":
             weapon = "9 มม.ฝังเวทย์"
+            print("""คุณได้ใช้แพ็คเกจของผู้ย้อนกลับ
+[พระเจ้า]รูัสึกสมเพชในตัวคุณ""")
+            break
         elif choice != "":
             print("เฮ้ นั้นมันไม่ใช่อาวุธที่มีอยู่นะ!!!\n")
     typing("-"*24+"\n")
