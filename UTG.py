@@ -10,9 +10,9 @@ def fighting(mon, status_player, status_mon):
     """ต่อสู้"""
     atk_player = random.randrange(status_player["str"]-4, status_player["str"]+2)
     atk_mon = random.randrange(status_mon["str"]-4, status_mon["str"]+2)
-    typing("-"*24)
+    typing("-"*24+"\n")
     print("""\nพบเจอ %s แล้ว!!"""%mon)
-    typing("-"*24)
+    typing("\n"+"-"*24)
     while True:
         print("\n%s\nHP : %d\n"%(mon, status_mon['hp']))
         print("%s\nHP : %d/%d\nMP : %d/%d\n"%(st.Player["name"], status_player["hp"], status_player["max_hp"], status_player["mp"], status_player["max_mp"]))
@@ -26,14 +26,14 @@ def fighting(mon, status_player, status_mon):
             status_mon['hp'] -= atk_player
         
         if status_mon['hp'] <= 0:
-            typing("-"*24)
+            typing("-"*24+"\n")
             print("""\nปราบ %s แล้ว!!"""%mon)
             #***********สุุ่มพวกอาวุธ สุ่ม potion ที่จะได้**********
-            typing("-"*24+"\n")
+            typing("\n"+"-"*24+"\n\n")
             return
-        typing("-"*24)
+        typing("-"*24+"\n")
         print("\nคุณได้ %s ใส่ %s\nทำดาเมจ %d"%(action, mon, atk_player))
-        typing("-"*24)
+        typing("\n"+"-"*24)
 
 def typing(text):
     """ตัวหนังสือค่อยๆแสดง"""
@@ -55,7 +55,7 @@ def tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_p
     output = climage.convert('monster\\'+random_image, is_unicode=True, width=45)
     
     typing("%s : \"ฮึ่มม... แปลกจริงนะข้ารับรู้ได้ถึงพลังที่แข็งแกร่ง แต่เจ้าหาใช่ผู้ย้อนกลับงั้นรึ ถ้าอย่างงั้นข้าจะสอนเจ้าเองนี้เพราะข้าเห็นว่าเจ้ามีแววหรอกนะ\"\n"%god)
-    print("\nขณะนี้คุณได้เข้ามสู่ชั้น 1")
+    print("\nขณะนี้คุณได้เข้าสู่ชั้น 1")
     typing("%s : \"เอาล่ะจ้าได้เข้าสู่ชั้นแรกแล้วลองไปสู้กับมอนนั้นเพื่อทะยานไปชั้นต่อไปเลย!!!\"\n"%god)
     print()
     
@@ -105,10 +105,10 @@ def choices_player(status_player, point_player, player_item, weapon_status, weap
                     status_player['hp'] = status_player['max_hp']
                 if status_player['mp'] > status_player['max_mp']:
                     status_player['mp'] = status_player['max_mp']
-                typing("-"*24)
+                typing("-"*24+"\n")
                 typing("\nHP : %d/%d"%(status_player["hp"], status_player["max_hp"]))
                 typing("\nMP : %d/%d\n"%(status_player["mp"], status_player["max_mp"]))
-                typing("-"*24)
+                typing("\n"+"-"*24)
                 print("\nกรุณาเลือกใช้ไอเทม")
                 print("1 : HP Potion\t%d"%player_item['HP potion']+"  (การใช้งานขวดหนึ่งสามารถเพิ่ม HP ได้ 25%)"*guide)
                 print("2 : MP Potion\t%d"%player_item['MP potion']+"  (การใช้งานขวดหนึ่งสามารถเพิ่ม MP ได้ 20%)"*guide)
@@ -139,7 +139,7 @@ def choices_player(status_player, point_player, player_item, weapon_status, weap
 def upgrade_pointplayer(point_player, status_player, weapon_status, weapon_rate, stack_weapon, guide=0):
     while True:
         control = 1
-        typing("-"*24)
+        typing("-"*24+"\n")
         print("\nHP :\t%d/%d\nMP :\t%d/%d\nSTR :\t%d\nAGI :\t%d\nINT :\t%d"\
             %(status_player['hp'], status_player['max_hp'], status_player['mp'], status_player['max_mp'], status_player['str'], status_player['agi'], status_player['int']))#ถ้าอัพค่าใดค่าหนึ่งแล้วค่านั้นจะมีผลเลย
         print("\nPoint : %d"%point_player)
@@ -148,7 +148,7 @@ def upgrade_pointplayer(point_player, status_player, weapon_status, weapon_rate,
         print("2 : AGI"+"\t(ค่า AGI จะเป็นการเพิ่มจำนวนรอบในการโจมตีก่อน หรือใครที่จะได้ตีก่อน)"*guide)
         print("3 : INT"+"\t(ค่า STR จะเป็นการเพิ่มดาเมจเวท และเพิ่ม MAX MP)"*guide)
         print("4 : กลับไปหน้าหลัก")
-        typing("-"*24+"\n")
+        typing("\n"+"-"*24+"\n")
         want_upgrade = input("กรุณาเลือกตัวเลือก : ")
     #*****แก้ให้เวลาอัพ แล้วแสดงทันที*****
         if want_upgrade == "1" and point_player != 0:
@@ -184,8 +184,8 @@ def upgrade_pointplayer(point_player, status_player, weapon_status, weapon_rate,
 
         status_player = st.Player.copy()
 
-        power_player_items(status_player, weapon_status, weapon_rate, stack_weapon, 0)
-        power_player(status_player)
+        power_player_items(weapon_status, weapon_rate, stack_weapon, 0)
+        power_player(status_player, weapon_status)
 
 def power_player_items(weapon_status, weapon_rate, stack_weapon, control=1):
     weapon_status['str'] += stack_weapon*control
@@ -202,7 +202,7 @@ def power_player_items(weapon_status, weapon_rate, stack_weapon, control=1):
         weapon_status["int"] += 5
         weapon_status["agi"] += 5
 
-    if weapon_rate == "ดีเยี่ยม" and control == 1:
+    if weapon_rate == "ตำนานจนละเอียด" and control == 1:
         weapon_status["str"] *= 2
         weapon_status["int"] *= 2
         weapon_status["agi"] *= 2
@@ -222,39 +222,41 @@ def power_player(status_player, weapon_status):
     if status_player["mp"] > status_player["max_mp"]:
         status_player["mp"] = status_player["max_mp"]
 
-def power_mon(mon, stack, mon_type):
-    mon['str'] += stack
-    mon['int'] += stack
-    mon['hp'] += mon['str']*5
-    mon['mp'] += mon['int']*5
+def power_mon(mon, status_mon, stack, mon_type):
+    status_mon['str'] += stack
+    status_mon['int'] += stack
+    status_mon['hp'] += status_mon['str']*5
+    status_mon['mp'] += status_mon['int']*5
 
     if mon_type == "Boss":
-        mon['hp'] += mon['hp']*50//100
-        mon['mp'] += mon['mp']*50//100
-        mon['str'] += mon['str']*50//100
-        mon['agi'] += mon['agi']*50//100
-        mon['int'] += mon['int']*50//100
+        status_mon['hp'] += status_mon['hp']*50//100
+        status_mon['mp'] += status_mon['mp']*50//100
+        status_mon['str'] += status_mon['str']*50//100
+        status_mon['agi'] += status_mon['agi']*50//100
+        status_mon['int'] += status_mon['int']*50//100
         mon_type = "\033[1;31;40m"+mon_type+"\033[0;37;40m"
 
     elif mon_type == "Miniboss":
-        mon['hp'] += mon['hp']*25//100
-        mon['mp'] += mon['mp']*25//100
-        mon['str'] += mon['str']*25//100
-        mon['agi'] += mon['agi']*25//100
-        mon['int'] += mon['int']*25//100
+        status_mon['hp'] += status_mon['hp']*25//100
+        status_mon['mp'] += status_mon['mp']*25//100
+        status_mon['str'] += status_mon['str']*25//100
+        status_mon['agi'] += status_mon['agi']*25//100
+        status_mon['int'] += status_mon['int']*25//100
         mon_type = "\033[1;36;40m"+mon_type+"\033[0;37;40m"
 
     if mon_type != "":
-        mon['name'] = mon_type+" "+mon['name']
+        mon = mon_type+" "+mon
+    return mon.strip()
 
-def inside_tower(level, weapon_status, choice):
+def inside_tower(level, weapon_status, choice, weapon_name):
     """tower"""
-    weapon_rate = ""
+    weapon_rate = "งั้นๆ"
     stack_mon, stack_weapon = 0, 0
     player_item = {"HP potion" : 0, "MP potion" : 0}
     point_player = 0
 
     while level != 51:
+        tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name = "", "", ""
         if choice == "2":
             level, choice, stack_mon, stack_weapon, player_item, point_player = \
             tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_player, weapon_rate)
@@ -276,14 +278,23 @@ def inside_tower(level, weapon_status, choice):
 
         power_player_items(weapon_status, weapon_rate, stack_weapon)
         power_player(status_player, weapon_status)
-        power_mon(status_mon, stack_mon, mon_type)
+        mon = power_mon(mon, status_mon, stack_mon, mon_type)
+        typing("ขณะนี้คุณได้เข้าสู่ชั้น %d\n"%level)
+        typing("\n"+"-"*24+"\n")
 
         point_player, status_player = choices_player(status_player, point_player, player_item, weapon_status, weapon_rate, stack_weapon)
 
         fighting(mon, status_player, status_mon)
 
-        if level != 0:
-            weapon_status, weapon_rate, weapon_name = it.re_item()#สุ่มไอเทม
+        if level != 0 and random.randrange(10) in [0, 1, 2, 3]:
+            tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name = it.re_item()#สุ่มไอเทม
+
+        if tmp_weapon_name != "":
+            print("คุณได้รับ %s ระดับ %s\tอาวุธเดิม %s ระดับ %s"%(tmp_weapon_name, tmp_weapon_rate, weapon_name, weapon_rate))
+            power_player_items(tmp_weapon_status, tmp_weapon_rate, stack_weapon)
+            print("STR : %d\t\t\t\tSTR : %d\nAGI : %d\t\t\t\tAGI : %d\nINT : %d\t\t\t\tINT : %d"%\
+                (tmp_weapon_status['str'], weapon_status['str'], tmp_weapon_status['agi'], weapon_status['agi'], tmp_weapon_status["int"], weapon_status['int']))
+            print("\n"+"-"*24+"\n")
 
         level += 1
         st.Player["max_hp"] += 5
@@ -293,19 +304,22 @@ def inside_tower(level, weapon_status, choice):
 def tower(object, choice):
     """เล่น"""
     level = 1
+    weapon_name = ""
     if object == "ดาบเก่าๆ":
+        weapon_name = "ดาบ"
         object = it.weapon["ดาบ"].copy()
     if object == "สมุดเวทย์ผุๆ":
+        weapon_name = "สมุดเวทย์"
         object = it.weapon["สมุดเวทย์"].copy()
 
-    inside_tower(level, object, choice)
+    inside_tower(level, object, choice, weapon_name)
 
 def main_story():
     """main story"""
     choice = ""
     print("\n\033[0;34;40m***กดปุ่ม Esc เพื่อ Skip***\n\033[0;37;40m")
     typing("ณ โลกที่แสนสงบสุข ได้มีวิญญาณร้ายกลายร่างเสกหอคอยแห่งความชั่วร้ายขึ้นมาหวังที่จะทำลายร้างโลกทิ้งไป")
-    typing("\nพระราชาจึงได้ประกาศว่า ใครที่สามารถทำลายหอคอยนี้ทิ้งได้จะบันดาลคำขอให้ 3 อย่าง นับแต่นั้นเป็นต้นมา")
+    typing("\nพระราชาจึงได้ประกาศว่า ใครที่สามารถทำลายหอคอย \033[1;35;40m50 ชั้น\033[0;37;40m นี้ทิ้งได้จะบันดาลคำขอให้ 3 อย่าง นับแต่นั้นเป็นต้นมา")
     typing("\nโลกก็ได้เข้าสู่ยุคสมัยของผู้กล้า ทุกคนต่างรวมตัวกันเพื่อที่จะทำลายหอคอย")
     #เลือกอาวุธ
     typing("\n\nท่านอยากใช้สิ่งใดเป็นอาวุธ")
@@ -320,12 +334,12 @@ def main_story():
             break
         elif choice != "":
             print("เฮ้ นั้นมันไม่ใช่อาวุธที่มีอยู่นะ!!!\n")
-    typing("-"*24)
+    typing("-"*24+"\n")
     #บอกชื่อและถามว่าจะข้ามบทฝึกสอนรึเปล่า
     typing("\nท่านก็เป็นคนคนหนึ่งที่กำลังจะเข้าสู่หอคอยทันใดนั้นก็มีเสียงเข้ามาในหัว")
     typing('\n\033[1;30;40mเสียงลึกลับ\033[0;37;40m : "ท่านมีนามว่าอะไร?"\n')
     name = input("ชื่อของคุณ : ")
-    typing("-"*24)
+    typing("\n"+"-"*24+"\n")
     st.Player['name'] = "\033[1;32;40m"+name+"\033[0;37;40m"
     typing("\n\033[1;30;40mเสียงลึกลับ\033[0;37;40m : \"ว้าวววว!!! ท่าน %s ท่านช่างดูสง่าราศี ข้าคือ %s ไม่ทราบว่าท่านเป็นผู้กลับชาติมาเกิดใช่รึไม่?\""%(st.Player["name"], god))
     typing("\n\nอธิบาย : ผู้กลับชาติมาเกิดหรือก็คือท่านเคยเล่นเกมนี้หรือไม่ตัวเกมจะได้สอนระบบบื้องต้น\n")
@@ -334,10 +348,8 @@ def main_story():
     while True:
         choice = input("กรุณาเลือกตัวเลือก : ")
         if choice == "1":
-            print("\n"+"*"*12)
             break
         elif choice == "2":
-            print("\n"+"*"*12)
             break
         elif choice == "3":
             break
@@ -346,6 +358,6 @@ def main_story():
     if choice == "3":
         print("ออกไวจริงเชียว")
         return
-    typing("-"*24+"\n")
+    typing("\n"+"-"*24+"\n\n")
     tower(weapon, choice)
 main_story()
