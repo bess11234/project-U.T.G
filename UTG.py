@@ -254,7 +254,8 @@ def inside_tower(level, weapon_status, choice, weapon_name):
     stack_mon, stack_weapon = 0, 0
     player_item = {"HP potion" : 0, "MP potion" : 0}
     point_player = 0
-
+    
+    power_player_items(weapon_status, weapon_rate, stack_weapon)
     while level != 51:
         tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name = "", "", ""
         if choice == "2":
@@ -276,7 +277,6 @@ def inside_tower(level, weapon_status, choice, weapon_name):
         status_mon = st.Monster[mon].copy()
         status_player = st.Player.copy()
 
-        power_player_items(weapon_status, weapon_rate, stack_weapon)
         power_player(status_player, weapon_status)
         mon = power_mon(mon, status_mon, stack_mon, mon_type)
         typing("ขณะนี้คุณได้เข้าสู่ชั้น %02d\n"%level)
@@ -300,11 +300,11 @@ def inside_tower(level, weapon_status, choice, weapon_name):
             print("STR : %02d\nAGI : %02d\nINT : %02d"%(weapon_status['str'], weapon_status['agi'], weapon_status["int"]))
             print("*"*24)
             print("1 : เปลี่ยน\n2 : ยกเลิก")
-            _ = input("ต้องการจะเปลี่ยนไหม : ")
-            if _ == 1:
+            num = input("ต้องการจะเปลี่ยนไหม : ")
+            if num == "1":
                 weapon_name = tmp_weapon_name
                 weapon_rate = tmp_weapon_rate
-                weapon_status = weapon_status
+                weapon_status = tmp_weapon_status
                 print("เปลี่ยนเสร็จสิ้น")
             print("\n"+"-"*24+"\n")
 

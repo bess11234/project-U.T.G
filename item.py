@@ -26,7 +26,7 @@ def re_item():
     """rate drop item"""
     random_rate = random.choice(rate_drop)
     random_drop = random.choice(weapon_drop)
-    gain = weapon[random_drop]
+    gain = weapon[random_drop].copy()
     return gain, random_rate, random_drop
 
 def rate_legend():
