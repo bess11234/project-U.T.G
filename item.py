@@ -33,6 +33,6 @@ def re_item():
 def rate_legend():
     """rate drop legendary waepon"""
     legend = ""
-    if random.randrange(10) == random.randrange(10):
+    if random.randrange(100) == random.randrange(100):
         legend = random.choice(legen_drop)
     return legend, weapon_legendary[legend]
