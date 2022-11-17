@@ -288,6 +288,7 @@ def inside_tower(level, weapon_status, choice, weapon_name):
 
         #สุ่ม Potion ด้วย
         tmp_legend, tmp_legend_status = it.rate_legend()
+
         if tmp_legend != "":
             print("*"*24)
             print("คุณได้รับ %s"%(tmp_legend))
@@ -305,7 +306,7 @@ def inside_tower(level, weapon_status, choice, weapon_name):
                 print("เปลี่ยนเสร็จสิ้น")
             print("\n"+"-"*24+"\n")
 
-        elif level != 0 and random.randrange(10) in [0, 1, 2, 3]:
+        elif level != 1 and random.randrange(10) in [0, 1, 2, 3]:
             tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name = it.re_item()#สุ่มไอเทม
         if tmp_weapon_name != "":
             print("*"*24)
