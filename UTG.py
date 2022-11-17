@@ -257,7 +257,7 @@ def inside_tower(level, weapon_status, choice, weapon_name):
     
     power_player_items(weapon_status, weapon_rate, stack_weapon)
     while level != 51:
-        tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name = "", "", ""
+        tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name, tmp_legend, tmp_legend_status = "", "", "", "", ""
         if choice == "2":
             level, choice, stack_mon, stack_weapon, player_item, point_player = \
             tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_player, weapon_rate)
@@ -287,9 +287,27 @@ def inside_tower(level, weapon_status, choice, weapon_name):
         fighting(mon, status_player, status_mon)
 
         #สุ่ม Potion ด้วย
-        if level != 0 and random.randrange(10) in [0, 1, 2, 3]:
-            tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name = it.re_item()#สุ่มไอเทม
+        tmp_legend, tmp_legend_status = it.rate_legend()
+        if tmp_legend != "":
+            print("*"*24)
+            print("คุณได้รับ %s"%(tmp_legend))
+            power_player_items(tmp_legend_status, "งั้นๆ", 0)
+            print("STR : %02d\nAGI : %02d\nINT : %02d"%(tmp_legend_status['str'], tmp_legend_status['agi'], tmp_legend_status["int"]))
+            print("*"*24)
+            print("อาวุธเดิม %s ระดับ %s"%(weapon_name, weapon_rate))
+            print("STR : %02d\nAGI : %02d\nINT : %02d"%(weapon_status['str'], weapon_status['agi'], weapon_status["int"]))
+            print("*"*24)
+            print("1 : เปลี่ยน\n2 : ยกเลิก")
+            num = input("ต้องการจะเปลี่ยนไหม : ")
+            if num == "1":
+                weapon_name = tmp_legend
+                weapon_rate = "งั้นๆ"
+                weapon_status = tmp_legend_status
+                print("เปลี่ยนเสร็จสิ้น")
+            print("\n"+"-"*24+"\n")
 
+        elif level != 0 and random.randrange(10) in [0, 1, 2, 3]:
+            tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name = it.re_item()#สุ่มไอเทม
         if tmp_weapon_name != "":
             print("*"*24)
             print("คุณได้รับ %s ระดับ %s"%(tmp_weapon_name, tmp_weapon_rate))
