@@ -59,8 +59,8 @@ def tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_p
     typing("%s : \"เอาล่ะจ้าได้เข้าสู่ชั้นแรกแล้วลองไปสู้กับมอนนั้นเพื่อทะยานไปชั้นต่อไปเลย!!!\"\n"%god)
     print()
     
-    while level < 10:
-        if level == 0:
+    while level <= 10:
+        if level == 1:
             typing("***คุณสามารถที่จะใช้ไอเทม เพื่อเพิ่ม HP, MP หรือคุณสามารถที่จะอัพพอยต์เพื่อเพิ่มความแข็งแกร่งให้ตัวละครคุณ \033[1;31;40mก่อนจะสู้กับมอนเตอร์\033[0;37;40m***\n\n")
             point_player, status_player = choices_player(status_player, point_player, player_item, weapon_status, weapon_rate, stack_weapon, 1)
             print("-"*24)
@@ -187,7 +187,7 @@ def upgrade_pointplayer(point_player, status_player, weapon_status, weapon_rate,
         power_player_items(status_player, weapon_status, weapon_rate, stack_weapon, 0)
         power_player(status_player)
 
-def power_player_items(status_player, weapon_status, weapon_rate, stack_weapon, control=1):
+def power_player_items(weapon_status, weapon_rate, stack_weapon, control=1):
     weapon_status['str'] += stack_weapon*control
     weapon_status['int'] += stack_weapon*control
     weapon_status['agi'] += stack_weapon*control
@@ -207,15 +207,16 @@ def power_player_items(status_player, weapon_status, weapon_rate, stack_weapon, 
         weapon_status["int"] *= 2
         weapon_status["agi"] *= 2
 
+def power_player(status_player, weapon_status):
     status_player['str'] += weapon_status['str']
     status_player['int'] += weapon_status['int']
     status_player['agi'] += weapon_status['agi']
 
-def power_player(status_player):
     status_player['max_hp'] += status_player['str']*5
     status_player['max_mp'] += status_player['int']*5
     status_player['hp'] += status_player['str']*5
     status_player['mp'] += status_player['int']*5
+
     if status_player["hp"] > status_player["max_hp"]:
         status_player["hp"] = status_player["max_hp"]
     if status_player["mp"] > status_player["max_mp"]:
@@ -253,19 +254,17 @@ def inside_tower(level, weapon_status, choice):
     player_item = {"HP potion" : 0, "MP potion" : 0}
     point_player = 0
 
-    while level != 50:
+    while level != 51:
         if choice == "2":
             level, choice, stack_mon, stack_weapon, player_item, point_player = \
             tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_player, weapon_rate)
-        if level != 0:
-            weapon_status, weapon_rate, weapon_name = it.re_item()#สุ่มไอเทม
         mon_type = ""
         mon = st.re_mon() #สุ่มมอนที่จะสู้
         stack_mon += 1 + level//10 #ถ้าจะฟาร์มต่อจะไม่บวกเพิ่ม
         stack_weapon += 1
-        if level%10 == 0 and level != 0:
+        if level%10 == 0:
             mon_type = "Boss"
-        elif level%5 == 0 and level != 0:
+        elif level%5 == 0:
             mon_type = "Miniboss"
         if level%10 == 1 and level != 1:
             for i in st.Monster:
@@ -275,16 +274,17 @@ def inside_tower(level, weapon_status, choice):
         status_mon = st.Monster[mon].copy()
         status_player = st.Player.copy()
 
-        power_player_items(status_player, weapon_status, weapon_rate, stack_weapon)
-        power_player(status_player)
+        power_player_items(weapon_status, weapon_rate, stack_weapon)
+        power_player(status_player, weapon_status)
         power_mon(status_mon, stack_mon, mon_type)
 
         point_player, status_player = choices_player(status_player, point_player, player_item, weapon_status, weapon_rate, stack_weapon)
 
         fighting(mon, status_player, status_mon)
-        
-        
-        
+
+        if level != 0:
+            weapon_status, weapon_rate, weapon_name = it.re_item()#สุ่มไอเทม
+
         level += 1
         st.Player["max_hp"] += 5
         st.Player["hp"] += 5
@@ -292,7 +292,7 @@ def inside_tower(level, weapon_status, choice):
 
 def tower(object, choice):
     """เล่น"""
-    level = 0
+    level = 1
     if object == "ดาบเก่าๆ":
         object = it.weapon["ดาบ"].copy()
     if object == "สมุดเวทย์ผุๆ":
