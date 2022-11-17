@@ -291,7 +291,6 @@ def inside_tower(level, weapon_status, choice, weapon_name):
         if tmp_legend != "":
             print("*"*24)
             print("คุณได้รับ %s"%(tmp_legend))
-            power_player_items(tmp_legend_status, "งั้นๆ", 0)
             print("STR : %02d\nAGI : %02d\nINT : %02d"%(tmp_legend_status['str'], tmp_legend_status['agi'], tmp_legend_status["int"]))
             print("*"*24)
             print("อาวุธเดิม %s ระดับ %s"%(weapon_name, weapon_rate))
