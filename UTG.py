@@ -286,6 +286,7 @@ def inside_tower(level, weapon_status, choice, weapon_name):
 
         fighting(mon, status_player, status_mon)
 
+        #สุ่ม Potion ด้วย
         if level != 0 and random.randrange(10) in [0, 1, 2, 3]:
             tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name = it.re_item()#สุ่มไอเทม
 
