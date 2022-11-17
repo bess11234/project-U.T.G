@@ -250,7 +250,10 @@ def power_mon(mon, status_mon, stack, mon_type):
 
 def inside_tower(level, weapon_status, choice, weapon_name):
     """tower"""
-    weapon_rate = "งั้นๆ"
+    if weapon_name == "9 มม.ฝังเวทย์":
+        weapon_rate = "Inwza007"
+    else:
+        weapon_rate = "งั้นๆ"
     stack_mon, stack_weapon = 0, 0
     player_item = {"HP potion" : 0, "MP potion" : 0}
     point_player = 0
@@ -341,6 +344,9 @@ def tower(object, choice):
     if object == "สมุดเวทย์ผุๆ":
         weapon_name = "สมุดเวทย์"
         object = it.weapon["สมุดเวทย์"].copy()
+    if object == "9 มม.ฝังเวทย์":
+        weapon_name = "9 มม.ฝังเวทย์"
+        object = it.weapon_secret["9 มม.ฝังเวทย์"].copy()
 
     inside_tower(level, object, choice, weapon_name)
 
@@ -362,6 +368,8 @@ def main_story():
         elif choice == "2":
             weapon = "สมุดเวทย์ผุๆ"
             break
+        elif choice == "uuddlrlrab":
+            weapon = "9 มม.ฝังเวทย์"
         elif choice != "":
             print("เฮ้ นั้นมันไม่ใช่อาวุธที่มีอยู่นะ!!!\n")
     typing("-"*24+"\n")
