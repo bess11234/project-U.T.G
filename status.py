@@ -1,5 +1,5 @@
 import random
-Player = {'hp': 10, 'mp': 10, 'str': 10, 'agi': 10, 'int': 10}
+Player = {'name': "", 'hp': 10, 'mp': 10, 'max_hp': 10, 'max_mp': 10, 'str': 10, 'agi': 10, 'int': 10}
 Name_Boss_random = ['Slime', 'Ant', 'Goblin', 'Orc', 'Lizard', 'Ancient Robot']
 Monster = {'Slime': {'hp': 2, 'mp': 2, 'str': 1, 'agi': 2, 'int': 3, 'skill': {'พุ่งโจมตี': 10, 'พ่นเมือก': (7, 14), 'กลืนกิน': (20, 20), 'กัดรุนแรง': (30, 27), 'ระเบิดเมือก': (40, 80)}  },
             'Ant': {'hp': 3, 'mp': 3, 'str': 2, 'agi': 4, 'int': 2, 'skill': {'โจมตีธรรมดา': 10, 'กัด': 12, 'พุ่งโจมตี': 17, 'พ่นพิษ': (26, 20), 'เจาะเกราะ': (30, 70)}},
