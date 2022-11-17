@@ -300,7 +300,7 @@ def inside_tower(level, weapon_status, choice, weapon_name):
             num = input("ต้องการจะเปลี่ยนไหม : ")
             if num == "1":
                 weapon_name = tmp_legend
-                weapon_rate = "งั้นๆ"
+                weapon_rate = "Inwza007"
                 weapon_status = tmp_legend_status
                 print("เปลี่ยนเสร็จสิ้น")
             print("\n"+"-"*24+"\n")
