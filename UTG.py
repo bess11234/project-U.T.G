@@ -368,7 +368,7 @@ def main_story():
         elif choice == "2":
             weapon = "สมุดเวทย์ผุๆ"
             break
-        elif choice == "uuddlrlrab":
+        elif choice.lower() == "uuddlrlrab":
             weapon = "9 มม.ฝังเวทย์"
             print("""คุณได้ใช้แพ็คเกจของผู้ย้อนกลับ
 [พระเจ้า]รูัสึกสมเพชในตัวคุณ""")
