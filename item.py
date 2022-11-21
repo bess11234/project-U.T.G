@@ -4,7 +4,7 @@ import random
 """item in game Ultimate tower super ultra Character Galaxy of god"""
 rate_drop = ["แย่", "งั้นๆ", "งั้นๆ", "งั้นๆ", "งั้นๆ", "งั้นๆ", "ดีเยี่ยม", "ดีเยี่ยม", "ดีเยี่ยม", "ตำนานจนละเอียด"]
 #ถ้ามีเวลาค่อยใส่ของกวนๆ
-potion_drop = ["Potion HP", "Potion MP"]
+potion_drop = ["Potion HP", "Potion HP", "Potion HP", "Potion MP", "Potion MP", "Potion MP", "แว่นตาที่แตกพ่ายของผู้สร้าง", "ลุงตูบที่อยู่บ้านข้างๆ", "กระป๋องน้ำซ่าชื่นใจ", "ความรักที่คุณให้เขาไปแต่เขาไม่ให้เคยให้อะไรกลับมา"]
 legen_drop = ["กิ้งไม้แห่งสัจธรรม", "สว่านทะลวงสวรรค์"]
 weapon_drop = ["ดาบ", "เรเปีย", "สมุดเวทย์", "หอก", "ดาบยักษ์", "ดาบสามมือ", "คฑาเวทย์", "ตะเกียงเวทย์", "ไม้กายสิทธิ์", "ระเบิดเวทย์"]
 
@@ -36,3 +36,10 @@ def rate_legend():
     if random.randrange(100) == random.randrange(100):
         legend = random.choice(legen_drop)
     return legend, weapon_legendary[legend]
+
+def re_potion():
+    """rate drop item"""
+    number_rate = [1, 1, 1, 1, 1, 2, 2, 2, 3, 3]
+    random_number = random.choice(number_rate)
+    get = [random.choice(potion_drop) for _ in range(random_number)]
+    return get
