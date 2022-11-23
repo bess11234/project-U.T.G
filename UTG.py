@@ -1,6 +1,6 @@
 import status as st
 import item as it
-import sys, time
+import sys, time, os
 import climage
 import keyboard
 import random
@@ -47,7 +47,7 @@ def use_item(status_player, player_item, guide=0):
             typing("-"*24+"\n")
             print("\nคุณได้ใช้ HP potion ฟื้นฟูเลือด %d\n"%(status_player['max_hp']*25//100))
             typing("-"*24)
-            return
+            return 1
 
         elif use == "2" and player_item['MP potion'] != 0:
             status_player['mp'] += status_player['max_mp']*20//100
@@ -56,7 +56,7 @@ def use_item(status_player, player_item, guide=0):
             typing("-"*24+"\n")
             print("\nคุณได้ใช้ MP potion ฟื้นฟูมานา %d\n"%(status_player['max_mp']*20//100))
             typing("-"*24)
-            return
+            return 1
 
         elif (use == "1" or use == "2") and (player_item['HP potion'] == 0 or  player_item['MP potion'] == 0):
             print("คุณไม่มี HP potion ให้ใช้"*(use == "1")+"คุณไม่มี MP potion ให้ใช้"*(use == "2"))
@@ -68,10 +68,11 @@ def use_item(status_player, player_item, guide=0):
 
         else:
             print("ไม่มีตัวเลือกนี้")
-    return
+    return 0
 
 def use_skill(status_player, weapon_status, tmp_skill, unlock_skill):
     """ใช้สกิล"""
+    print()
     for num, skill in zip(range(1, unlock_skill), weapon_status["skill"]):
         tmp_skill.update({str(num) : (skill, weapon_status["skill"][skill][0], weapon_status["skill"][skill][1], weapon_status["skill"][skill][2], weapon_status["skill"][skill][3])})
     stop = max(list(map(int, list(tmp_skill))))+1
@@ -99,10 +100,12 @@ def use_skill(status_player, weapon_status, tmp_skill, unlock_skill):
 def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_skill):
     """ต่อสู้"""
 
-    typing("-"*24+"\n")
+    typing("\n"+"-"*24+"\n")
     print("""\nพบเจอ %s แล้ว!!"""%mon)
     typing("\n"+"-"*24)
-    
+    time.sleep(0.3)
+    os.system('cls')
+    typing("-"*24)
     turn_player = status_player["agi"]//status_mon["agi"]
     turn_monster = status_mon["agi"]//status_player["agi"]
     turn_player += 1*(turn_player == 0)
@@ -122,10 +125,10 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                 typing("-"*24+"\n")
             
                 if action == "1":
-                    action = "โจมตีปกติ"
+                    action = "\033[1;49;33mโจมตีปกติ\033[0;37;40m"
                     status_mon['hp'] -= atk_player
                 
-                if action == "2":
+                elif action == "2":
                     tmp_skill = {}
                     action = use_skill(status_player, weapon_status, tmp_skill, unlock_skill)
                     if action == "Back":
@@ -138,31 +141,40 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                         if tmp_skill[action][4] == "i":
                             atk_player += tmp_skill[action][3]*status_player["int"]
                         status_mon['hp'] -= atk_player
-                        action = "สกิล"+tmp_skill[action][0]
+                        action = "\033[1;49;34mสกิล"+tmp_skill[action][0]+"\033[0;37;40m"
                     typing("-"*24+"\n")
                 
-                if action == "3":
-                    use_item(status_player, player_item)
-                    break
+                elif action == "3":
+                    check = use_item(status_player, player_item)
+                    if check == 1:
+                        break
+                    else:
+                        continue
+                
+                else:
+                    print("\nไม่มีตัวเลือกนี้\n")
+                    typing("-"*24)
+                    continue
 
-                print("\nคุณได้ใช้ %s ใส่ %s\nทำดาเมจ %02d"%(action, mon, atk_player))
+                print("\nคุณได้ใช้ %s ใส่ %s\nดาเมจ %02d"%(action, mon, atk_player))
                 typing("\n"+"-"*24)
                 
                 if status_mon['hp'] <= 0:
-                    print("""\n\nปราบ %s แล้ว!!"""%mon)
+                    print("""\n\n\033[0;49;31mปราบ\033[0;37;40m %s \033[0;49;31mปราบแล้ว!!\033[0;37;40m"""%mon)
                     #***********สุุ่มพวกอาวุธ สุ่ม potion ที่จะได้**********
                     typing("\n"+"-"*24+"\n\n")
+                    time.sleep(1)
                     return
                 break
 
         for _ in range(turn_monster):
             atk_mon = random.randrange(status_mon["str"]-4, status_mon["str"]+2) # มอนตี
-            action = [1, 1, 1 ,1 ,1, 2, 2 ,2 ,2, 1]
+            action = [1, 1, 1 ,1 ,1, 2, 2 ,2 ,1 , 1]
             action = random.choice(action)
             if action == 2:
                 tmp_skill = mon_use_skill(status_mon, unlock_skill)
                 if tmp_skill != [None]:
-                    action = "สกิล"+tmp_skill[0]
+                    action = "\033[2;49;31mสกิล"+tmp_skill[0]+"\033[0;37;40m"
                     atk_mon = tmp_skill[1][0]
                     status_mon["mp"] -= tmp_skill[1][1]
                     if tmp_skill[1][3] == "s":
@@ -173,13 +185,15 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                     action = 1
 
             if action == 1:
-                action = "โจมตีปกคิ"
+                action = "\033[0;49;90mโจมตีปกติ\033[0;37;40m"
 
             status_player["hp"] -= atk_mon
             st.Player["hp"] -= atk_mon
             
-            print("\n\nศัตรูได้ใช้ %s ใส่ %s\nทำดาเมจ %02d"%(action, st.Player["name"], atk_mon))
+            print("\n\n%s ได้ใช้ %s ใส่ %s\nดาเมจ %02d"%(mon, action, st.Player["name"], atk_mon))
             typing("\n"+"-"*24)
+        os.system('cls')
+        typing("-"*24)
 
 def typing(text):
     """ตัวหนังสือค่อยๆแสดง"""
@@ -246,7 +260,9 @@ def choices_player(status_player, point_player, player_item, weapon_status, weap
             return point_player, status_player
 
         elif select == "2":
+            typing("-"*24+"\n")
             use_item(status_player, player_item, guide)
+            print("\n")
 
         elif select == "3":
             point_player, status_player = upgrade_pointplayer(point_player, status_player, weapon_status, weapon_rate, stack_weapon, guide)
@@ -270,28 +286,28 @@ def upgrade_pointplayer(point_player, status_player, weapon_status, weapon_rate,
         want_upgrade = input("กรุณาเลือกตัวเลือก : ").strip()
     #*****แก้ให้เวลาอัพ แล้วแสดงทันที*****
         if want_upgrade == "1" and point_player != 0:
-            print("\nจะอัพกี่พอยต์ ? \nพิมพ์ b เพื่อกลับไปหน้าอัพสเตตัส")
+            print("\nจะอัพกี่พอยต์ ? \nพิมพ์ \033[0;49;31mB\033[0;37;40m เพื่อกลับไปหน้าอัพสเตตัส")
             spent_point = input("จำนวนพอยต์ที่จะใช้ : ").lower().strip()
             if spent_point.isdecimal() and point_player >= int(spent_point):
                 st.Player['str'] += int(spent_point)
                 point_player -= int(spent_point)
                 control = 0
         elif want_upgrade == "2" and point_player != 0:
-            print("\nจะอัพกี่พอยต์ ? \nพิมพ์ b เพื่อกลับไปหน้าอัพสกิล")
+            print("\nจะอัพกี่พอยต์ ? \nพิมพ์ \033[0;49;31mB\033[0;37;40m เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input("จำนวนพอยต์ที่จะใช้ : ").lower().strip()
             if spent_point.isdecimal() and point_player >= int(spent_point):
                 st.Player['agi'] += int(spent_point)
                 point_player -= int(spent_point)
                 control = 0
         elif want_upgrade == "3" and point_player != 0:
-            print("\nจะอัพกี่พอยต์ ? \nพิมพ์ b เพื่อกลับไปหน้าอัพสกิล")
+            print("\nจะอัพกี่พอยต์ ? \nพิมพ์ \033[0;49;31mB\033[0;37;40m เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input("จำนวนพอยต์ที่จะใช้ : ").lower().strip()
             if spent_point.isdecimal() and point_player >= int(spent_point):
                 st.Player['int'] += int(spent_point)
                 point_player -= int(spent_point)
                 control = 0
         elif want_upgrade == "4":
-            typing("-"*24+"\n")
+            typing("-"*24+"\n\n")
             return point_player, status_player
 
         if point_player == 0:
@@ -405,12 +421,12 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
 
         power_player(status_player, weapon_status)
         mon = power_mon(mon, status_mon, stack_mon, mon_type)
-        typing("ขณะนี้คุณได้เข้าสู่ชั้น %d\n"%level)
+        os.system('cls')
+        typing("-"*24+"\n\n")
+        typing("\033[0;49;93mขณะนี้คุณได้เข้าสู่ชั้น\033[0;37;40m %d\n"%level)
         typing("\n"+"-"*24+"\n\n")
 
         point_player, status_player = choices_player(status_player, point_player, player_item, weapon_status, weapon_rate, stack_weapon)
-        
-        
 
         fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_skill)
 
@@ -419,10 +435,10 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
 
         if tmp_legend != "":
             print("*"*24)
-            print("คุณได้รับ %s"%(tmp_legend))
+            print("\033[2;49;34mคุณได้รับ\033[0;37;40m %s"%(tmp_legend))
             print("STR : %02d\nAGI : %02d\nINT : %02d"%(tmp_legend_status['str'], tmp_legend_status['agi'], tmp_legend_status["int"]))
             print("*"*24)
-            print("อาวุธเดิม %s ระดับ %s"%(weapon_name, weapon_rate))
+            print("\033[2;49;93mอาวุธเดิม\033[0;37;40m %s ระดับ %s"%(weapon_name, weapon_rate))
             print("STR : %02d\nAGI : %02d\nINT : %02d"%(weapon_status['str'], weapon_status['agi'], weapon_status["int"]))
             print("*"*24)
             print("1 : เปลี่ยน\n2 : ยกเลิก")
@@ -439,11 +455,11 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
 
         if tmp_weapon_name != "":
             print("*"*24)
-            print("คุณได้รับ %s ระดับ %s"%(tmp_weapon_name, tmp_weapon_rate))
+            print("\033[2;49;34mคุณได้รับ\033[0;37;40m %s ระดับ %s"%(tmp_weapon_name, tmp_weapon_rate))
             power_player_items(tmp_weapon_status, tmp_weapon_rate, stack_weapon)
             print("STR : %02d\nAGI : %02d\nINT : %02d"%(tmp_weapon_status['str'], tmp_weapon_status['agi'], tmp_weapon_status["int"]))
             print("*"*24)
-            print("อาวุธเดิม %s ระดับ %s"%(weapon_name, weapon_rate))
+            print("\033[2;49;93mอาวุธเดิม\033[0;37;40m %s ระดับ %s"%(weapon_name, weapon_rate))
             print("STR : %02d\nAGI : %02d\nINT : %02d"%(weapon_status['str'], weapon_status['agi'], weapon_status["int"]))
             print("*"*24)
             print("1 : เปลี่ยน\n2 : ยกเลิก")
