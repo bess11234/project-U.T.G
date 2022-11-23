@@ -7,6 +7,16 @@ import random
 god = "\033[1;33;40m[พระเจ้า]\033[0;37;40m"
 
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
+def mon_use_skill(status_mon, unlock_skill):
+    """มอนใช้สกิล"""
+    tmp_skill = [i[1] for i in zip(range(1, unlock_skill), status_mon["skill"]) if status_mon["skill"][i[1]][1] <= status_mon["mp"]]
+    if tmp_skill == []:
+        tmp_skill = [None]
+    else:
+        tmp_skill = random.choice(tmp_skill)
+        tmp_skill = [tmp_skill, status_mon["skill"][tmp_skill]]
+    return tmp_skill
+
 def use_item(status_player, player_item, guide=0):
     """ใช้ไอเทม"""
     while True:
@@ -92,51 +102,84 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
     typing("-"*24+"\n")
     print("""\nพบเจอ %s แล้ว!!"""%mon)
     typing("\n"+"-"*24)
-    while True:
-        atk_player = random.randrange(status_player["str"]-4, status_player["str"]+2)
-        atk_mon = random.randrange(status_mon["str"]-4, status_mon["str"]+2) # มอนตี
-
-        print("\n\n%s\nHP : %02d\n"%(mon, status_mon['hp']))
-        print("%s\nHP : %02d/%02d\nMP : %02d/%02d\n"%(st.Player["name"], status_player["hp"], status_player["max_hp"], status_player["mp"], status_player["max_mp"]))
-        print("1 : โจมตีปกติ")
-        print("2 : ใช้สกิล")
-        print("3 : ใช้ไอเทม")
-        typing("-"*24+"\n")
-        action = input("กรุณาเลือกตัวเลือก : ").strip()
-        typing("-"*24+"\n")
     
-        if action == "1":
-            action = "โจมตีปกติ"
-            status_mon['hp'] -= atk_player
-        
-        if action == "2":
-            tmp_skill = {}
-            action = use_skill(status_player, weapon_status, tmp_skill, unlock_skill)
-            if action == "Back":
-                typing("-"*24)
-                continue
-            else:
-                atk_player = tmp_skill[action][1]
-                if tmp_skill[action][4] == "s":
-                    atk_player += tmp_skill[action][3]*status_player["str"]
-                if tmp_skill[action][4] == "i":
-                    atk_player += tmp_skill[action][3]*status_player["int"]
-                status_mon['hp'] -= atk_player
-                action = "สกิล"+tmp_skill[action][0]
-            typing("-"*24+"\n")
-        
-        if action == "3":
-            use_item(status_player, player_item)
-            continue
+    turn_player = status_player["agi"]//status_mon["agi"]
+    turn_monster = status_mon["agi"]//status_player["agi"]
+    turn_player += 1*(turn_player == 0)
+    turn_monster += 1*(turn_monster == 0)
 
-        print("\nคุณได้ใช้ %s ใส่ %s\nทำดาเมจ %02d"%(action, mon, atk_player))
-        typing("\n"+"-"*24)
-        
-        if status_mon['hp'] <= 0:
-            print("""\n\nปราบ %s แล้ว!!"""%mon)
-            #***********สุุ่มพวกอาวุธ สุ่ม potion ที่จะได้**********
-            typing("\n"+"-"*24+"\n\n")
-            return
+    while True:
+        for _ in range(turn_player):
+            atk_player = random.randrange(status_player["str"]-4, status_player["str"]+2)
+            while True:
+                print("\n\n%s\nHP : %02d\n"%(mon, status_mon['hp']))
+                print("%s\nHP : %02d/%02d\nMP : %02d/%02d\n"%(st.Player["name"], status_player["hp"], status_player["max_hp"], status_player["mp"], status_player["max_mp"]))
+                print("1 : โจมตีปกติ")
+                print("2 : ใช้สกิล")
+                print("3 : ใช้ไอเทม")
+                typing("-"*24+"\n")
+                action = input("กรุณาเลือกตัวเลือก : ").strip()
+                typing("-"*24+"\n")
+            
+                if action == "1":
+                    action = "โจมตีปกติ"
+                    status_mon['hp'] -= atk_player
+                
+                if action == "2":
+                    tmp_skill = {}
+                    action = use_skill(status_player, weapon_status, tmp_skill, unlock_skill)
+                    if action == "Back":
+                        typing("-"*24)
+                        continue
+                    else:
+                        atk_player = tmp_skill[action][1]
+                        if tmp_skill[action][4] == "s":
+                            atk_player += tmp_skill[action][3]*status_player["str"]
+                        if tmp_skill[action][4] == "i":
+                            atk_player += tmp_skill[action][3]*status_player["int"]
+                        status_mon['hp'] -= atk_player
+                        action = "สกิล"+tmp_skill[action][0]
+                    typing("-"*24+"\n")
+                
+                if action == "3":
+                    use_item(status_player, player_item)
+                    break
+
+                print("\nคุณได้ใช้ %s ใส่ %s\nทำดาเมจ %02d"%(action, mon, atk_player))
+                typing("\n"+"-"*24)
+                
+                if status_mon['hp'] <= 0:
+                    print("""\n\nปราบ %s แล้ว!!"""%mon)
+                    #***********สุุ่มพวกอาวุธ สุ่ม potion ที่จะได้**********
+                    typing("\n"+"-"*24+"\n\n")
+                    return
+                break
+
+        for _ in range(turn_monster):
+            atk_mon = random.randrange(status_mon["str"]-4, status_mon["str"]+2) # มอนตี
+            action = [1, 1, 1 ,1 ,1, 2, 2 ,2 ,2, 1]
+            action = random.choice(action)
+            if action == 2:
+                tmp_skill = mon_use_skill(status_mon, unlock_skill)
+                if tmp_skill != [None]:
+                    action = "สกิล"+tmp_skill[0]
+                    atk_mon = tmp_skill[1][0]
+                    status_mon["mp"] -= tmp_skill[1][1]
+                    if tmp_skill[1][3] == "s":
+                        atk_mon += status_mon["str"]*tmp_skill[1][2]
+                    if tmp_skill[1][3] == "i":
+                        atk_mon += status_mon["int"]*tmp_skill[1][2]
+                else:
+                    action = 1
+
+            if action == 1:
+                action = "โจมตีปกคิ"
+
+            status_player["hp"] -= atk_mon
+            st.Player["hp"] -= atk_mon
+            
+            print("\n\nศัตรูได้ใช้ %s ใส่ %s\nทำดาเมจ %02d"%(action, st.Player["name"], atk_mon))
+            typing("\n"+"-"*24)
 
 def typing(text):
     """ตัวหนังสือค่อยๆแสดง"""
@@ -300,6 +343,7 @@ def power_player(status_player, weapon_status):
 def power_mon(mon, status_mon, stack, mon_type):
     status_mon['str'] += stack
     status_mon['int'] += stack
+    status_mon['agi'] += stack
     status_mon['hp'] += status_mon['str']*5
     status_mon['mp'] += status_mon['int']*5
 
@@ -365,6 +409,8 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
         typing("\n"+"-"*24+"\n\n")
 
         point_player, status_player = choices_player(status_player, point_player, player_item, weapon_status, weapon_rate, stack_weapon)
+        
+        
 
         fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_skill)
 
