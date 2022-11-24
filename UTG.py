@@ -17,7 +17,7 @@ def mon_use_skill(status_mon, unlock_skill):
         tmp_skill = [tmp_skill, status_mon["skill"][tmp_skill]]
     return tmp_skill
 
-def use_item(status_player, player_item, guide=0):
+def use_item(status_player, player_item, guide=0, tmp=0):
     """ใช้ไอเทม"""
     while True:
         if status_player['hp'] > status_player['max_hp']:
@@ -47,7 +47,8 @@ def use_item(status_player, player_item, guide=0):
             typing("-"*24+"\n")
             print("\nคุณได้ใช้ HP potion ฟื้นฟูเลือด \033[0;49;31m%d\033[0;37;40m\n"%(status_player['max_hp']*25//100))
             typing("-"*24)
-            return 1
+            if tmp == 1:
+                return 1
 
         elif use == "2" and player_item['MP potion'] != 0:
             status_player['mp'] += status_player['max_mp']*20//100
@@ -56,7 +57,8 @@ def use_item(status_player, player_item, guide=0):
             typing("-"*24+"\n")
             print("\nคุณได้ใช้ MP potion ฟื้นฟูมานา \033[0;49;34m%d\033[0;37;40m\n"%(status_player['max_mp']*20//100))
             typing("-"*24)
-            return 1
+            if tmp == 1:
+                return 1
 
         elif (use == "1" or use == "2") and (player_item['HP potion'] == 0 or  player_item['MP potion'] == 0):
             print("คุณไม่มี HP potion ให้ใช้"*(use == "1")+"คุณไม่มี MP potion ให้ใช้"*(use == "2"))
@@ -149,7 +151,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                     typing("-"*24+"\n")
                 
                 elif action == "3":
-                    check = use_item(status_player, player_item)
+                    check = use_item(status_player, player_item, 0, 1)
                     if check == 1:
                         break
                     else:
@@ -483,7 +485,7 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
 
         if tmp_legend != "" and level >= 30:
             print("*"*24)
-            print("\033[2;49;34mคุณได้รับ\033[0;0;0m%s"%(tmp_legend))
+            print("\033[2;49;34mคุณได้รับ\033[0;0;0m%s ระดับ Inwza007"%(tmp_legend))
             print("STR : %02d\nAGI : %02d\nINT : %02d"%(tmp_legend_status['str'], tmp_legend_status['agi'], tmp_legend_status["int"]))
             print("*"*24)
             print("\033[2;49;93mอาวุธเดิม\033[0;0;0m%s ระดับ %s"%(weapon_name, weapon_rate))
