@@ -169,7 +169,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                 typing("\n"+"-"*24)
                 
                 if status_mon['hp'] <= 0:
-                    typing("""\n\n\033[0;49;31mคุณปราบ\033[0;0;0m%s \033[0;49;31mแล้ว!!\033[0;0;0m\n\n"""%mon)
+                    typing("""\n\n\033[0;49;31mคุณปราบ\033[0;0;0m %s \033[0;49;31mแล้ว!!\033[0;0;0m\n\n"""%mon)
                     #***********สุุ่มพวกอาวุธ สุ่ม potion ที่จะได้**********
                     drop = it.re_potion()
                     for i in drop:
@@ -468,8 +468,8 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
         
         if status_player["hp"] <= 0:
             print("-"*24+"\n")
-            typing("Game Over"+"\n\n\n")
-            typing("คุณตายแล้ว")
+            typing("Game Over\n")
+            typing("คุณตายแล้ว\n")
             print("-"*24+"\n")
             break
 
