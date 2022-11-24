@@ -4,7 +4,7 @@ import sys, time, os
 import climage
 import keyboard
 import random
-god = "\033[1;33;40m[พระเจ้า]\033[0;37;40m"
+god = "\033[1;33;40m[พระเจ้า]\033[0;0;0m"
 
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
 def mon_use_skill(status_mon, unlock_skill):
@@ -45,7 +45,7 @@ def use_item(status_player, player_item, guide=0, tmp=0):
             st.Player["hp"] += status_player["max_hp"]*25//100
             player_item['HP potion'] -= 1
             typing("-"*24+"\n")
-            print("\nคุณได้ใช้ HP potion ฟื้นฟูเลือด \033[0;49;31m%d\033[0;37;40m\n"%(status_player['max_hp']*25//100))
+            print("\nคุณได้ใช้ HP potion ฟื้นฟูเลือด \033[0;49;31m%d\033[0;0;0m\n"%(status_player['max_hp']*25//100))
             typing("-"*24)
             if tmp == 1:
                 return 1
@@ -55,7 +55,7 @@ def use_item(status_player, player_item, guide=0, tmp=0):
             st.Player["mp"] += status_player["max_mp"]*20//100
             player_item['MP potion'] -= 1
             typing("-"*24+"\n")
-            print("\nคุณได้ใช้ MP potion ฟื้นฟูมานา \033[0;49;34m%d\033[0;37;40m\n"%(status_player['max_mp']*20//100))
+            print("\nคุณได้ใช้ MP potion ฟื้นฟูมานา \033[0;49;34m%d\033[0;0;0m\n"%(status_player['max_mp']*20//100))
             typing("-"*24)
             if tmp == 1:
                 return 1
@@ -131,7 +131,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                 typing("-"*24+"\n")
             
                 if action == "1":
-                    action = "\033[1;49;33mโจมตีปกติ\033[0;37;40m"
+                    action = "\033[1;49;33mโจมตีปกติ\033[0;0;0m"
                     status_mon['hp'] -= atk_player
 
                 elif action == "2":
@@ -147,7 +147,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                         if tmp_skill[action][4] == "i":
                             atk_player += tmp_skill[action][3]*status_player["int"]
                         status_mon['hp'] -= int(atk_player)
-                        action = "\033[1;49;34mสกิล"+tmp_skill[action][0]+"\033[0;37;40m"
+                        action = "\033[1;49;34mสกิล"+tmp_skill[action][0]+"\033[0;0;0m"
                     typing("-"*24+"\n")
                 
                 elif action == "3":
@@ -166,7 +166,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                 typing("\n"+"-"*24)
                 
                 if status_mon['hp'] <= 0:
-                    typing("""\n\n\033[0;49;31mคุณปราบ\033[0;0;0m%s \033[0;49;31mแล้ว!!\033[0;37;40m\n\n"""%mon)
+                    typing("""\n\n\033[0;49;31mคุณปราบ\033[0;0;0m%s \033[0;49;31mแล้ว!!\033[0;0;0m\n\n"""%mon)
                     #***********สุุ่มพวกอาวุธ สุ่ม potion ที่จะได้**********
                     drop = it.re_potion()
                     for i in drop:
@@ -192,7 +192,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
             if action == 2:
                 tmp_skill = mon_use_skill(status_mon, unlock_skill)
                 if tmp_skill != [None]:
-                    action = "\033[2;49;31mสกิล"+tmp_skill[0]+"\033[0;37;40m"
+                    action = "\033[2;49;31mสกิล"+tmp_skill[0]+"\033[0;0;0m"
                     atk_mon = tmp_skill[1][0]
                     status_mon["mp"] -= tmp_skill[1][1]
                     if tmp_skill[1][3] == "s":
@@ -203,7 +203,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                     action = 1
 
             if action == 1:
-                action = "\033[0;49;90mโจมตีปกติ\033[0;37;40m"
+                action = "\033[0;49;90mโจมตีปกติ\033[0;0;0m"
 
             status_player["hp"] -= atk_mon
             st.Player["hp"] -= atk_mon
@@ -243,7 +243,7 @@ def tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_p
     
     while level <= 10:
         if level == 1:
-            typing("***คุณสามารถที่จะใช้ไอเทม เพื่อเพิ่ม HP, MP หรือคุณสามารถที่จะอัพพอยต์เพื่อเพิ่มความแข็งแกร่งให้ตัวละครคุณ \033[1;31;40mก่อนจะสู้กับมอนเตอร์\033[0;37;40m***\n\n")
+            typing("***คุณสามารถที่จะใช้ไอเทม เพื่อเพิ่ม HP, MP หรือคุณสามารถที่จะอัพพอยต์เพื่อเพิ่มความแข็งแกร่งให้ตัวละครคุณ \033[1;31;40mก่อนจะสู้กับมอนเตอร์\033[0;0;0m***\n\n")
             point_player, status_player = choices_player(status_player, point_player, player_item, weapon_status, weapon_rate, stack_weapon, 1)
             print("-"*24)
             print("""พบเจอมอนเตอร์ %s แล้ว!!\nHP :\t%02d"""%(mon, status_mon["hp"]))
@@ -409,7 +409,7 @@ def power_mon(mon, status_mon, stack, mon_type):
         status_mon['str'] += status_mon['str']*100//100
         status_mon['agi'] += status_mon['agi']*100//100
         status_mon['int'] += status_mon['int']*100//100
-        mon_type = "\033[1;31;40m"+mon_type+"\033[0;37;40m"
+        mon_type = "\033[1;31;40m"+mon_type+"\033[0;0;0m"
 
     elif mon_type == "Miniboss":
         status_mon['hp'] += status_mon['hp']*50//100
@@ -417,7 +417,7 @@ def power_mon(mon, status_mon, stack, mon_type):
         status_mon['str'] += status_mon['str']*50//100
         status_mon['agi'] += status_mon['agi']*50//100
         status_mon['int'] += status_mon['int']*50//100
-        mon_type = "\033[1;36;40m"+mon_type+"\033[0;37;40m"
+        mon_type = "\033[1;36;40m"+mon_type+"\033[0;0;0m"
 
     if mon_type != "":
         mon = mon_type+" "+mon
@@ -558,7 +558,7 @@ def tower(object, choice):
 def main_story():
     """main story"""
     choice = ""
-    print("\n\033[0;34;40m***กดปุ่ม Esc เพื่อ Skip***\n\033[0;37;40m")
+    print("\n\033[0;34;40m***กดปุ่ม Esc เพื่อ Skip***\n\033[0;0;0m")
     typing("ณ โลกที่แสนสงบสุข ได้มีวิญญาณร้ายกลายร่างเสกหอคอยแห่งความชั่วร้ายขึ้นมาหวังที่จะทำลายร้างโลกทิ้งไป")
     typing("\nพระราชาจึงได้ประกาศว่า ใครที่สามารถทำลายหอคอย \033[1;35;40m50 ชั้น\033[0;0;0mนี้ทิ้งได้จะบันดาลคำขอให้ 3 อย่าง นับแต่นั้นเป็นต้นมา")
     typing("\nโลกก็ได้เข้าสู่ยุคสมัยของผู้กล้า ทุกคนต่างรวมตัวกันเพื่อที่จะทำลายหอคอย")
@@ -586,7 +586,7 @@ def main_story():
     typing('\n\033[1;30;40mเสียงลึกลับ\033[0;0;0m: "ท่านมีนามว่าอะไร?"\n')
     name = input("ชื่อของคุณ : ")
     typing("\n"+"-"*24+"\n")
-    st.Player['name'] = "\033[1;32;40m"+name+"\033[0;37;40m"
+    st.Player['name'] = "\033[1;32;40m"+name+"\033[0;0;0m"
     if weapon == "9 มม.ฝังเวทย์":
         typing("\n\033[1;30;40mเสียงลึกลับ\033[0;0;0m: \"ว้าวววว!!! ท่าน %s ท่านช่างดูเหยาะแหยะ ปวกเปียกและน่าสมเพชเหลือเกิน ข้าคือ %s ไม่ทราบว่าท่านเป็นไก่อ่อนผู้กลับชาติมาเกิดรึเปล่า?\""%(st.Player["name"], god))
         typing("\n\nอธิบาย : ผู้กลับชาติมาเกิดหรือก็คือท่านเคยเล่นเกมนี้หรือไม่ตัวเกมจะได้สอนระบบบื้องต้น\n")
