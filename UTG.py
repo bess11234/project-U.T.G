@@ -5,6 +5,16 @@ import climage
 import keyboard
 import random
 god = "\033[1;33;40m[พระเจ้า]\033[0;0;0m"
+def fixed(status_player):
+    """ปรับ hp"""
+    if status_player['hp'] > status_player['max_hp']:
+        status_player['hp'] = status_player['max_hp']
+    if status_player['mp'] > status_player['max_mp']:
+        status_player['mp'] = status_player['max_mp']
+    if st.Player["hp"] > st.Player["max_hp"]:
+        st.Player["hp"] = st.Player["max_hp"]
+    if st.Player["mp"] > st.Player["max_mp"]:
+        st.Player["mp"] = st.Player["max_mp"]
 
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
 def mon_use_skill(status_mon, unlock_skill):
@@ -20,15 +30,6 @@ def mon_use_skill(status_mon, unlock_skill):
 def use_item(status_player, player_item, guide=0, tmp=0):
     """ใช้ไอเทม"""
     while True:
-        if status_player['hp'] > status_player['max_hp']:
-            status_player['hp'] = status_player['max_hp']
-        if status_player['mp'] > status_player['max_mp']:
-            status_player['mp'] = status_player['max_mp']
-        if st.Player["hp"] > st.Player["max_hp"]:
-            st.Player["hp"] = st.Player["max_hp"]
-        if st.Player["mp"] > st.Player["max_mp"]:
-            st.Player["mp"] = st.Player["max_mp"]
-
         typing("\nHP : %02d/%02d"%(status_player["hp"], status_player["max_hp"]))
         typing("\nMP : %02d/%02d\n"%(status_player["mp"], status_player["max_mp"]))
         typing("\n"+"-"*24)
@@ -47,6 +48,7 @@ def use_item(status_player, player_item, guide=0, tmp=0):
             typing("-"*24+"\n")
             print("\nคุณได้ใช้ HP potion ฟื้นฟูเลือด \033[0;49;31m%d\033[0;0;0m\n"%(status_player['max_hp']*25//100))
             typing("-"*24)
+            fixed(status_player)
             if tmp == 1:
                 return 1
 
@@ -57,6 +59,7 @@ def use_item(status_player, player_item, guide=0, tmp=0):
             typing("-"*24+"\n")
             print("\nคุณได้ใช้ MP potion ฟื้นฟูมานา \033[0;49;34m%d\033[0;0;0m\n"%(status_player['max_mp']*20//100))
             typing("-"*24)
+            fixed(status_player)
             if tmp == 1:
                 return 1
 
