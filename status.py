@@ -10,3 +10,30 @@ Monster = {'Slime': {'hp': 2, 'mp': 2, 'str': 1, 'agi': 2, 'int': 3, 'skill': {'
 def re_mon():
         random_mon = random.choice(Name_Boss_random)
         return random_mon
+def imagemon(mon):
+        color = []
+        if mon == "Slime":
+                color = ["blue_slime.png", "green_slime.png", "nerd_slime.png", "purple_slime.png", "red_slime.png"]
+                color = random.choice(color)
+                return color
+        if mon == "Ant":
+                color = ["ant.png"]
+                color = random.choice(color)
+                return color
+        if mon == "Goblin":
+                color = ["Goblin.png"]
+                color = random.choice(color)
+                return color
+        if mon == "Orc":
+                color = ["Orc_gere.png"]
+                color = random.choice(color)
+                return color
+        if mon == "Lizard":
+                color = ["lizard.png"]
+                color = random.choice(color)
+                return color
+        if mon == "Ancient Robot":
+                color = ["ruin_guard.png"]
+                color = random.choice(color)
+                return color
+        
