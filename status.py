@@ -13,7 +13,7 @@ def re_mon():
 def imagemon(mon):
         color = []
         if mon == "Slime":
-                color = ["blue_slime.png", "green_slime.png", "nerd_slime.png", "purple_slime.png", "red_slime.png"]
+                color = ["slime\\blue_slime.png", "slime\\green_slime.png", "slime\\nerd_slime.png", "slime\\purple_slime.png", "slime\\red_slime.png"]
                 color = random.choice(color)
                 return color
         if mon == "Ant":
@@ -29,7 +29,7 @@ def imagemon(mon):
                 color = random.choice(color)
                 return color
         if mon == "Lizard":
-                color = ["lizard.png"]
+                color = ["lizard\\purple_lizard.png", "lizard\\rainbow_lizard.png"]
                 color = random.choice(color)
                 return color
         if mon == "Ancient Robot":

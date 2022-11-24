@@ -131,7 +131,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                 if action == "1":
                     action = "\033[1;49;33mโจมตีปกติ\033[0;37;40m"
                     status_mon['hp'] -= atk_player
-                
+
                 elif action == "2":
                     tmp_skill = {}
                     action = use_skill(status_player, weapon_status, tmp_skill, unlock_skill)
@@ -176,7 +176,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                             item = climage.convert('item\\mana_potion.png', is_unicode=True, width=15)
                             player_item["MP potion"] += 1
                         else:
-                            item = climage.convert('item\\broke_glasses.png', is_unicode=True, width=15)
+                            item = climage.convert('item\\glasses.png', is_unicode=True, width=15)
                         print(item)
                     input("กด Enter เพื่อรับ")
                     typing("\n"+"-"*24+"\n\n")
@@ -463,7 +463,7 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
         
         if status_player["hp"] <= 0:
             print("-"*24+"\n")
-            typing("Game Over"+"\n")
+            typing("Game Over"+"\n\n\n")
             typing("คุณตายแล้ว")
             print("-"*24+"\n")
             break
