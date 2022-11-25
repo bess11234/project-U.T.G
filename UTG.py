@@ -540,6 +540,9 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
         st.Player["max_hp"] += 5
         st.Player["hp"] += 5
         point_player += 3
+    
+    if level == 51:
+        print("คุณทำลายหอคอยได้แล้ว")
 
 
 def tower(object, choice):
