@@ -212,7 +212,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
             st.Player["hp"] -= atk_mon
             
             print("\n\n%s ได้ใช้ %s ใส่ %s\nดาเมจ %02d"%(mon, action, st.Player["name"], atk_mon))
-            typing("\n"+"-"*24)
+            typing("\n"+"-"*24+"\n")
             
             if status_player["hp"] <= 0 :
                 return
@@ -469,7 +469,7 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
         if status_player["hp"] <= 0:
             print("-"*24+"\n")
             typing("Game Over\n")
-            typing("คุณตายแล้ว\n")
+            typing("คุณตายที่ชั้น %d แล้ว\n"%level)
             typing('[เสียงปริศนา]:"ลูกแกะหลงทางที่น่าสงสารเจ้าช่างปวกเปียกและเหยาะแหยะเสียจริง"\n')
             typing('[เสียงปริศนา]:"เห็นแก่ที่ข้าสงสารเจ้า ข้าจะบอกอะไรดีๆให้ฟังก็แล้วกัน"\n')
             typing('[เสียงปริศนา]:"ในช่วงที่เจ้าเลือกอาวุธคู่กายเจ้าลองท่องคาถา [uuddlrlrab] ดูสิแล้วมันจะบังเกิดอภินิหารขึ้น"\n')
@@ -558,7 +558,6 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
         print("คุณกำลังกลับเมืองเพื่อไปรับพร 3 ข้อจากพระราชา\
         \nแต่ทว่าไม่มีใครอยู่อีกแล้ว\nเพราะเวลาในหอคอยกับชีวิตจริงนั้นไม่เท่ากัน\
         \nกว่าคุณจะพิชิตหอคอยได้มันก็ผ่านไปราว 1000 ปีได้แล้ว\nเรื่องราวจะเป็นอย่างไรต่อไป\nTo be continue")
-
 
 def tower(object, choice):
     """เล่น"""
