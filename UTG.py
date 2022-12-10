@@ -1,9 +1,87 @@
-import status as st
-import item as it
 import sys, time, os
 import climage
 import keyboard
 import random
+Player = {'name': "", 'hp': 10, 'mp': 10, 'max_hp': 10, 'max_mp': 10, 'str': 10, 'agi': 10, 'int': 10}
+Name_Boss_random = ['Slime', 'Ant', 'Goblin', 'Orc', 'Lizard', 'Ancient Robot']
+Monster = {'Slime': {'hp': 2, 'mp': 2, 'str': 1, 'agi': 2, 'int': 3, 'skill': {'พุ่งโจมตี': (10, 0, 0.3,"s"), 'พ่นเมือก': (7, 14, 0.4, "i"), 'กลืนกิน': (20, 20, 0.5, "s"), 'กัดรุนแรง': (30, 27, 0.8, "s"), 'ระเบิดเมือก': (40, 80, 1, "i")}  },
+            'Ant': {'hp': 3, 'mp': 3, 'str': 2, 'agi': 4, 'int': 2, 'skill': {'โจมตีธรรมดา': (10, 0, 0.4,"s"), 'กัด': (12, 0, 0.6, "s"), 'พุ่งโจมตี': (17, 0, 0.8, "s"), 'พ่นพิษ': (26, 20, 1, "i"), 'เจาะเกราะ': (30, 70, 3, "s")}},
+            'Goblin': {'hp': 5, 'mp': 5, 'str': 4, 'agi': 5, 'int': 4, 'skill': {'ต่อย': (11, 0, 0.8, "s"), 'ฟาดด้วยสันดาบ': (8, 0, 1, "s"), 'คบเพลิงไฟ': (19, 50, 1.5, "i"), 'เฉือนเนื้อ': (24, 0, 2, "s"), 'ฟาดฟัน': (30, 0, 2.5, "s")}},
+            'Orc': {'hp': 15, 'mp': 3, 'str': 6, 'agi': 3, 'int': 0, 'skill': {'ทุบ': (7, 0, 1, "s"), 'คำราม': (12, 20, 2, "i"), 'แขนยักษ์': (18, 0, 1, "s"), 'ทำลายล้าง': (25, 50, 2, "s"), 'พสุธากัมปนาท': (35, 70, 2.8, "s")}},
+            'Lizard': {'hp': 4, 'mp': 20, 'str': 2, 'agi': 18, 'int': 5, 'skill': {'ลอบกัด': (13, 0, 2, "s"), 'เคลือบพิษ': (17, 140, 2, "i") , 'กรงเล็บปีศาจ': (20, 170, 1.4, "s"), 'สายฟ้าฟาด': (27, 200, 2, "i"), 'ความเร็วเทพ': (30, 250, 3, "i")}},
+            'Ancient Robot': {'hp': 10, 'mp': 2, 'str': 5, 'agi': 15, 'int': 20, 'skill': {'D': (5, 40, 2, "i"), 'E': (5, 40, 2, "i"), 'A': (5, 40, 2, "i"), 'T': (5, 40, 2, "i"), 'H': (50, 400, 5, "i")}}}
+def re_mon():
+        random_mon = random.choice(Name_Boss_random)
+        return random_mon
+def imagemon(mon):
+        color = []
+        if mon == "Slime":
+                color = ["slime\\blue_slime.png", "slime\\green_slime.png", "slime\\nerd_slime.png", "slime\\purple_slime.png", "slime\\red_slime.png"]
+                color = random.choice(color)
+                return color
+        if mon == "Ant":
+                color = ["ant\\ant_blue.png", "ant\\ant_green.png", "ant\\ant_purple.png"]
+                color = random.choice(color)
+                return color
+        if mon == "Goblin":
+                color = ["Goblin.png"]
+                color = random.choice(color)
+                return color
+        if mon == "Orc":
+                color = ["Orc_gere.png"]
+                color = random.choice(color)
+                return color
+        if mon == "Lizard":
+                color = ["lizard\\purple_lizard.png", "lizard\\rainbow_lizard.png"]
+                color = random.choice(color)
+                return color
+        if mon == "Ancient Robot":
+                color = ["ruin_guard\\blue_ruin_guard.png", "ruin_guard\\red_ruin_guard.png"]
+                color = random.choice(color)
+                return color
+
+rate_drop = ["แย่", "งั้นๆ", "งั้นๆ", "งั้นๆ", "งั้นๆ", "งั้นๆ", "ดีเยี่ยม", "ดีเยี่ยม", "ดีเยี่ยม", "ตำนานจนละเอียด"]
+#ถ้ามีเวลาค่อยใส่ของกวนๆ
+potion_drop = ["Potion HP", "Potion HP", "Potion HP", "Potion MP", "Potion MP", "Potion MP", "แว่นตาที่แตกพ่ายของผู้สร้าง", "ลุงตูบที่อยู่บ้านข้างๆ", "กระป๋องน้ำซ่าชื่นใจ", "ความรักที่คุณให้เขาไปแต่เขาไม่ให้เคยให้อะไรกลับมา"]
+legen_drop = ["กิ้งไม้แห่งสัจธรรม", "สว่านทะลวงสวรรค์"]
+weapon_drop = ["ดาบ", "เรเปีย", "สมุดเวทย์", "หอก", "ดาบยักษ์", "ดาบสามมือ", "คฑาเวทย์", "ตะเกียงเวทย์", "ไม้กายสิทธิ์", "ระเบิดเวทย์"]
+
+weapon_legendary = {"กิ้งไม้แห่งสัจธรรม":{"str": 1000, "int": 1000, "agi": 50, "skill":{"ความจริงมีเพียงหนึ่งเดียว!": (1000, 2, 5, "i")}}, 
+                    "สว่านทะลวงสวรรค์":{"str": 1000, "int": 1000, "agi": 60, "skill":{"บุกทะลวงเข้าไป!": (1200, 1, 5, "s")}}, 
+                    "":""}
+weapon_secret = {"9 มม.ฝังเวทย์":{"str": 2000, "int": 2000, "agi": 20, "skill":{"นี้แหละวิธีแก้ปัญหาที่ดีที่สุด": (2000, 1, 5, "i")}}}
+weapon = {"ดาบ": {"str": 5, "int": 0, "agi": 3, "skill": {"ฟันตรง": (4, 5, 1.1, "s"), "ดาบเฉือนลม": (16, 5, 1.5, "s"), "ฟันแหลก": (35, 10, 2, "s"), "ดาบสั่งตายใจสั่งมา": (300, 50, 3, "s")}}, 
+              "หอก": {"str": 6, "int": 0, "agi": 4, "skill": {"แทงตรง": (4, 5, 1.1, "s"), "ทะลวงเข้าไป!": (16, 10, 1.5, "s"), "ควงสว่าน": (50, 15, 2, "s"), "เฮลิปเตอร์!": (350, 40, 3, "s")}}, 
+              "เรเปีย": {"str": 3, "int": 0, "agi": 9, "skill": {"ยก": (2, 5, 1.1, "s"), "ชิด": (19, 4, 1.5, "s"), "จ้วง": (60, 30, 2, "s"), "แทง!": (350, 50, 3, "s")}}, 
+              "ดาบยักษ์": {"str": 10, "int": 0, "agi": -1, "skill": {"ฟันตรงแบบแรง!": (6, 5, 1.1, "s"), "ตบลอย": (25, 15, 1.5, "s"), "ถล่มพสุธา": (70, 30, 2, "s"), "ผ่าปฐพี": (500, 150, 3, "s")}}, 
+              "ดาบสามมือ": {"str": 8, "int": 0, "agi": 5, "skill": {"ฟันสามต่อ": (5, 5, 1.1, "s"), "ตัดผ่าอากาศสามต่อ": (15, 6, 1.5, "s"), "เพลงดาบสายลม 36 ประกาศ": (100, 40, 2, "s"), "อาชูรา": (450, 120, 4, "s")}}, 
+              "สมุดเวทย์": {"str": 0, "int": 5, "agi": 3, "skill": {"ลูกบอลไฟ": (3, 5, 1.5, "i"), "สายฟ้าฟาด": (35, 25, 2, "i"), "เกมลงทัณฑ์แห่งความมืด": (60, 60, 3, "i"), "อ่านหนังสือซะบ้างเซ่!": (400, 125, 4, "i")}}, 
+              "คฑาเวทย์": {"str": 0, "int": 10, "agi": -1, "skill": {"คฑาเสริมเวทย์ฟาดไม่ยั้ง": (4, 5, 1.5, "i"), "ลมเฉือน": (29, 11, 2, "i"), "ไปคุยกับรากมะม่วง!": (80, 70, 3, "i"), "ตัวแทนแห่งวันจันทร์จะลงทัณฑ์แกเอง": (500, 150, 4, "i")}}, 
+              "ตะเกียงเวทย์": {"str": 0, "int": 7, "agi": 1, "skill": {"เวทแห่งแสง": (3, 5, 1.5, "i"), "พาาาลังงงคลื่นนเต่าาาา!": (35, 15, 2, "i"), "ดาบผนึกแห่งแสง": (75, 65, 3, "i"), "บอลเกงกิ": (450, 125, 4, "i")}}, 
+              "ไม้กายสิทธิ์": {"str": 0, "int": 6, "agi": 7, "skill": {"สติลไวไฟ": (4, 5, 1.5, "i"), "ร้ายกาจจจ": (50, 20, 2, "i"), "เอสเปรสโซ่ปลาโตนุ่ม": (100, 65, 3, "i"), "อะวาเคดาบร้า": (499, 149, 4, "i")}}, 
+              "ระเบิดเวทย์": {"str": 0, "int": 8, "agi": 5, "skill": {"ประทัด": (3, 5, 1.5, "i"), "ระเบิดมือ": (30, 21, 2, "i"), "ทีเอ็นที": (100, 60, 3, "i"), "ระเบิดเวลาอ๊ากกกกกก!": (499, 149, 4, "i")}}}
+
+def re_item():
+    """rate drop item"""
+    random_rate = random.choice(rate_drop)
+    random_drop = random.choice(weapon_drop)
+    gain = weapon[random_drop].copy()
+    return gain, random_rate, random_drop
+
+def rate_legend():
+    """rate drop legendary waepon"""
+    legend = ""
+    if random.randrange(100) == random.randrange(100):
+        legend = random.choice(legen_drop)
+    return legend, weapon_legendary[legend]
+
+def re_potion():
+    """rate drop item"""
+    number_rate = [1, 1, 1, 1, 1, 2, 2, 2, 3, 3]
+    random_number = random.choice(number_rate)
+    get = [random.choice(potion_drop) for _ in range(random_number)]
+    return get
+
 god = "\033[1;33;40m[พระเจ้า]\033[0;0;0m"
 def fixed(status_player):
     """ปรับ hp"""
@@ -11,10 +89,10 @@ def fixed(status_player):
         status_player['hp'] = status_player['max_hp']
     if status_player['mp'] > status_player['max_mp']:
         status_player['mp'] = status_player['max_mp']
-    if st.Player["hp"] > st.Player["max_hp"]:
-        st.Player["hp"] = st.Player["max_hp"]
-    if st.Player["mp"] > st.Player["max_mp"]:
-        st.Player["mp"] = st.Player["max_mp"]
+    if Player["hp"] > Player["max_hp"]:
+        Player["hp"] = Player["max_hp"]
+    if Player["mp"] > Player["max_mp"]:
+        Player["mp"] = Player["max_mp"]
 
 """Ultimate tower super ultra Character Galaxy of god (UTG)"""
 def mon_use_skill(status_mon, unlock_skill):
@@ -43,7 +121,7 @@ def use_item(status_player, player_item, guide=0, tmp=0):
 
         if use == "1" and player_item['HP potion'] != 0:
             status_player['hp'] += status_player['max_hp']*25//100
-            st.Player["hp"] += status_player["max_hp"]*25//100
+            Player["hp"] += status_player["max_hp"]*25//100
             player_item['HP potion'] -= 1
             typing("-"*24+"\n")
             print("\nคุณได้ใช้ Potion HP ฟื้นฟูเลือด \033[0;49;31m%d\033[0;0;0m\n"%(status_player['max_hp']*25//100))
@@ -54,7 +132,7 @@ def use_item(status_player, player_item, guide=0, tmp=0):
 
         elif use == "2" and player_item['MP potion'] != 0:
             status_player['mp'] += status_player['max_mp']*20//100
-            st.Player["mp"] += status_player["max_mp"]*20//100
+            Player["mp"] += status_player["max_mp"]*20//100
             player_item['MP potion'] -= 1
             typing("-"*24+"\n")
             print("\nคุณได้ใช้ Potion MP ฟื้นฟูมานา \033[0;49;34m%d\033[0;0;0m\n"%(status_player['max_mp']*20//100))
@@ -91,7 +169,7 @@ def use_skill(status_player, weapon_status, tmp_skill, unlock_skill):
         if action in tmp_skill:
             #ทำปลดล็อคสกิลไว้ด้วย
             if status_player["mp"] >= tmp_skill[action][2]:
-                st.Player["mp"] -= tmp_skill[action][2]
+                Player["mp"] -= tmp_skill[action][2]
                 status_player["mp"] -= tmp_skill[action][2]
                 return action
             else:
@@ -110,7 +188,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
     typing("-"*24+"\n")
     print("""\nพบเจอ %s แล้ว!!"""%mon)
     typing("\n"+"-"*24)
-    image_mon = st.imagemon(mon.replace(mon_type+" ", ""))
+    image_mon = imagemon(mon.replace(mon_type+" ", ""))
     image_mon = climage.convert('monster\\'+image_mon, is_unicode=True, width=35)
     time.sleep(0.3)
     os.system('cls')
@@ -126,7 +204,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
             while True:
                 print("\n\n%s\n\033[2;49;31mHP\033[0;0;0m : %02d\n"%(mon, status_mon['hp']))
                 print(image_mon)
-                print("%s\n\033[0;49;31mHP\033[0;0;0m : %02d/%02d\n\033[0;49;34mMP\033[0;0;0m : %02d/%02d\n"%(st.Player["name"], status_player["hp"], status_player["max_hp"], status_player["mp"], status_player["max_mp"]))
+                print("%s\n\033[0;49;31mHP\033[0;0;0m : %02d/%02d\n\033[0;49;34mMP\033[0;0;0m : %02d/%02d\n"%(Player["name"], status_player["hp"], status_player["max_hp"], status_player["mp"], status_player["max_mp"]))
                 print("1 : โจมตีปกติ" + " (การโจมตีปกติจะคิด ดาเมจ จาก STR ทั้งหมดที่มี)"*guide)
                 print("2 : ใช้สกิล" + " (การใช้สกิลจะคูณ ดาเมจ จาก STR หรือ INT ทั้งหมดที่มี)"*guide)
                 print("3 : ใช้ไอเทม"+" (ใช้ไอเทมเพื่อฟื้นฟู \033[0;49;31mHP\033[0;0;0m หรือ \033[0;49;34mMP\033[0;0;0m)"*guide+"\n\033[0;49;90m**การใช้แต่ละตัวเลือกจะเสียจำนวนรอบ**\033[0;0;m"*guide+"\n")
@@ -172,7 +250,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                 if status_mon['hp'] <= 0:
                     typing("""\n\n\033[0;49;31mคุณปราบ\033[0;0;0m %s \033[0;49;31mแล้ว!!\033[0;0;0m\n\n"""%mon)
                     #***********สุุ่มพวกอาวุธ สุ่ม potion ที่จะได้**********
-                    drop = it.re_potion()
+                    drop = re_potion()
                     for i in drop:
                         print("คุณได้รับ %s"%i)
                         if i == "Potion HP":
@@ -210,9 +288,9 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                 action = "\033[0;49;90mโจมตีปกติ\033[0;0;0m"
 
             status_player["hp"] -= atk_mon
-            st.Player["hp"] -= atk_mon
+            Player["hp"] -= atk_mon
 
-            print("\n\n%s ได้ใช้ %s ใส่ %s\nดาเมจ %02d"%(mon, action, st.Player["name"], atk_mon))
+            print("\n\n%s ได้ใช้ %s ใส่ %s\nดาเมจ %02d"%(mon, action, Player["name"], atk_mon))
             typing("\n"+"-"*24+"\n")
 
             if status_player["hp"] <= 0 :
@@ -244,13 +322,13 @@ def tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_p
         stack_weapon += 1
 
         if level > 1:
-            mon = st.re_mon() #สุ่มมอนที่จะสู้
+            mon = re_mon() #สุ่มมอนที่จะสู้
             if level%10 == 0:
                 mon_type = "Boss"
             elif level%5 == 0:
                 mon_type = "Miniboss"
 
-        status_mon = st.Monster[mon].copy()
+        status_mon = Monster[mon].copy()
 
         os.system('cls')
         typing("-"*24+"\n\n")
@@ -266,7 +344,7 @@ def tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_p
         if level == 10:
             typing("%s : หึ เจ้ามาถึงชั้นที่ 5 ได้หรือนี้ การที่เจ้ามาถึงจุดนี้ได้แปลว่า ลางสังหรณ์ของข้าถูกต้อง ก่อนข้าจะไป ข้าจะบอกทริคให้หอคอยนี้ทุกๆ 5 ชั้นจะมี \033[1;36;40mMini-Boss\033[0;0;0m และทุกๆ 10 ชั้นจะมี \033[1;31;40mBoss\033[0;0;0m\n"%god)
             typing("%s : เตรียมตัวของเจ้าให้พร้อมก่อนจะสู้\n"%god)
-        status_player = st.Player.copy()
+        status_player = Player.copy()
         power_player(status_player, weapon_status)
         mon, mon_type = power_mon(mon, status_mon, stack_mon, mon_type)
 
@@ -278,8 +356,8 @@ def tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_p
         if status_player['hp'] <= 0:
             return level, 1, stack_mon, stack_weapon, player_item, point_player
 
-        st.Player["max_hp"] += 5
-        st.Player["hp"] += 5
+        Player["max_hp"] += 5
+        Player["hp"] += 5
         point_player += 3
 
             #print("""
@@ -347,21 +425,21 @@ def upgrade_pointplayer(point_player, status_player, weapon_status, weapon_rate,
             print("พิมพ์ \033[0;49;31mB\033[0;0;0m เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input("จำนวนพอยต์ที่จะใช้ : ").lower().strip()
             if spent_point.isdecimal() and point_player >= int(spent_point):
-                st.Player['str'] += int(spent_point)
+                Player['str'] += int(spent_point)
                 point_player -= int(spent_point)
                 control = 0
         elif want_upgrade == "2" and point_player != 0:
             print("พิมพ์ \033[0;49;31mB\033[0;0;0m เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input("จำนวนพอยต์ที่จะใช้ : ").lower().strip()
             if spent_point.isdecimal() and point_player >= int(spent_point):
-                st.Player['agi'] += int(spent_point)
+                Player['agi'] += int(spent_point)
                 point_player -= int(spent_point)
                 control = 0
         elif want_upgrade == "3" and point_player != 0:
             print("พิมพ์ \033[0;49;31mB\033[0;0;0m เพื่อกลับไปหน้าอัพสกิล")
             spent_point = input("จำนวนพอยต์ที่จะใช้ : ").lower().strip()
             if spent_point.isdecimal() and point_player >= int(spent_point):
-                st.Player['int'] += int(spent_point)
+                Player['int'] += int(spent_point)
                 point_player -= int(spent_point)
                 control = 0
         elif want_upgrade == "4":
@@ -389,7 +467,7 @@ def upgrade_pointplayer(point_player, status_player, weapon_status, weapon_rate,
         else:
             print("\033[0;49;90m\n**ไม่มีตัวเลือกนี้**\033[0;0;0m"*control)
 
-        status_player = st.Player.copy()
+        status_player = Player.copy()
 
         power_player_items(weapon_status, weapon_rate, stack_weapon, 0)
         power_player(status_player, weapon_status)
@@ -483,20 +561,20 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
 
         tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name, tmp_legend, tmp_legend_status = "", "", "", "", ""
         mon_type = ""
-        mon = st.re_mon() #สุ่มมอนที่จะสู้
+        mon = re_mon() #สุ่มมอนที่จะสู้
         stack_mon += 1 + level//10 #ถ้าจะฟาร์มต่อจะไม่บวกเพิ่ม
         if level%10 == 0:
             mon_type = "Boss"
         elif level%5 == 0:
             mon_type = "Mini-Boss"
         if level%10 == 1 and level != 1:
-            for i in st.Monster:
-                st.Monster[i]["agi"] += 10
+            for i in Monster:
+                Monster[i]["agi"] += 10
             point_player += 10
             unlock_skill += 1
 
-        status_mon = st.Monster[mon].copy()
-        status_player = st.Player.copy()
+        status_mon = Monster[mon].copy()
+        status_player = Player.copy()
 
         power_player(status_player, weapon_status)
 
@@ -527,7 +605,7 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
         fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_skill, mon_type)
 
         #สุ่ม Potion ด้วย
-        tmp_legend, tmp_legend_status = it.rate_legend()
+        tmp_legend, tmp_legend_status = rate_legend()
 
         if tmp_legend != "" and level >= 30:
             print("*"*24)
@@ -553,7 +631,7 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
             print("\n"+"-"*24+"\n")
 
         elif level != 1 and random.randrange(10) in [0, 1, 2, 3]:
-            tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name = it.re_item()#สุ่มไอเทม
+            tmp_weapon_status, tmp_weapon_rate, tmp_weapon_name = re_item()#สุ่มไอเทม
 
         if tmp_weapon_name != "":
             print("*"*24)
@@ -580,8 +658,8 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill):
             print("\n"+"-"*24+"\n")
 
         level += 1
-        st.Player["max_hp"] += 5
-        st.Player["hp"] += 5
+        Player["max_hp"] += 5
+        Player["hp"] += 5
         point_player += 3
     
     if level == 51 and weapon_name == "9 มม.ฝังเวทย์":
@@ -606,19 +684,20 @@ def tower(object, choice):
     weapon_name = ""
     if object == "ดาบเก่าๆ":
         weapon_name = "ดาบ"
-        object = it.weapon["ดาบ"].copy()
+        object = weapon["ดาบ"].copy()
     if object == "สมุดเวทย์ผุๆ":
         weapon_name = "สมุดเวทย์"
-        object = it.weapon["สมุดเวทย์"].copy()
+        object = weapon["สมุดเวทย์"].copy()
     if object == "9 มม.ฝังเวทย์":
         weapon_name = "9 มม.ฝังเวทย์"
-        object = it.weapon_secret["9 มม.ฝังเวทย์"].copy()
+        object = weapon_secret["9 มม.ฝังเวทย์"].copy()
 
     inside_tower(level, object, choice, weapon_name, 2)
 
 def main_story():
     """main story"""
     os.system("cls")
+    os.system("chcp 874")
     choice = ""
     print("\n\033[0;34;40m***กดปุ่ม Esc เพื่อ Skip***\n\033[0;0;0m")
     typing("ณ โลกที่แสนสงบสุข ได้มีวิญญาณร้ายกลายร่างเสกหอคอยแห่งความชั่วร้ายขึ้นมาหวังที่จะทำลายร้างโลกทิ้งไป")
@@ -648,13 +727,13 @@ def main_story():
     typing('\n\033[1;30;40mเสียงลึกลับ\033[0;0;0m: "ท่านมีนามว่าอะไร?"\n')
     name = input("ชื่อของคุณ : ")
     typing("\n"+"-"*24+"\n")
-    st.Player['name'] = "\033[1;32;40m"+name+"\033[0;0;0m"
+    Player['name'] = "\033[1;32;40m"+name+"\033[0;0;0m"
     if weapon == "9 มม.ฝังเวทย์":
-        typing("\n\033[1;30;40mเสียงลึกลับ\033[0;0;0m: \"ว้าวววว!!! ท่าน %s ท่านช่างดูเหยาะแหยะ ปวกเปียกและน่าสมเพชเหลือเกิน ข้าคือ %s ไม่ทราบว่าท่านเป็นไก่อ่อนผู้กลับชาติมาเกิดรึเปล่า?\""%(st.Player["name"], god))
+        typing("\n\033[1;30;40mเสียงลึกลับ\033[0;0;0m: \"ว้าวววว!!! ท่าน %s ท่านช่างดูเหยาะแหยะ ปวกเปียกและน่าสมเพชเหลือเกิน ข้าคือ %s ไม่ทราบว่าท่านเป็นไก่อ่อนผู้กลับชาติมาเกิดรึเปล่า?\""%(Player["name"], god))
         typing("\n\nอธิบาย : ผู้กลับชาติมาเกิดหรือก็คือท่านเคยเล่นเกมนี้หรือไม่ตัวเกมจะได้สอนระบบบื้องต้น\n")
         print("1 : ใช่แล้วฉันนี้้แหละผู้กลับชาติมาเกิด!!! (เคยเล่น)\n2 : อ่อไม่ใช่อะ (ไม่เคยเล่น)\n3 : ออกจากหอคอย")
     else:
-        typing("\n\033[1;30;40mเสียงลึกลับ\033[0;0;0m: \"ว้าวววว!!! ท่าน %s ท่านช่างดูสง่าราศี ข้าคือ %s ไม่ทราบว่าท่านเป็นผู้กลับชาติมาเกิดใช่รึไม่?\""%(st.Player["name"], god))
+        typing("\n\033[1;30;40mเสียงลึกลับ\033[0;0;0m: \"ว้าวววว!!! ท่าน %s ท่านช่างดูสง่าราศี ข้าคือ %s ไม่ทราบว่าท่านเป็นผู้กลับชาติมาเกิดใช่รึไม่?\""%(Player["name"], god))
         typing("\n\nอธิบาย : ผู้กลับชาติมาเกิดหรือก็คือท่านเคยเล่นเกมนี้หรือไม่ตัวเกมจะได้สอนระบบบื้องต้น\n")
         print("1 : ใช่แล้วฉันนี้้แหละผู้กลับชาติมาเกิด!!! (เคยเล่น)\n2 : อ่อไม่ใช่อะ (ไม่เคยเล่น)\n3 : ออกจากหอคอย")
 

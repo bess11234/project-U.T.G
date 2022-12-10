@@ -17,7 +17,7 @@ def imagemon(mon):
                 color = random.choice(color)
                 return color
         if mon == "Ant":
-                color = ["ant.png"]
+                color = ["ant\\ant_blue.png", "ant\\ant_green.png", "ant\\ant_purple.png"]
                 color = random.choice(color)
                 return color
         if mon == "Goblin":
