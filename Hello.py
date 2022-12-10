@@ -1,7 +1,4 @@
 def main():
-    from PIL import Image
-    import climage
-    for i in ["blood_potion.png", "broke_glasses.png", "mana_potion.png"]:
-        output = climage.convert('item\\'+i, is_unicode=True, width=15)
-        print(output)
+    print("\033[0;31;40mแดง")
+    print("\033[0;37;40mแดง")
 main()

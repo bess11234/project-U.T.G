@@ -33,7 +33,7 @@ def imagemon(mon):
                 color = random.choice(color)
                 return color
         if mon == "Ancient Robot":
-                color = ["ruin_guard.png"]
+                color = ["ruin_guard\\blue_ruin_guard.png", "ruin_guard\\red_ruin_guard.png"]
                 color = random.choice(color)
                 return color
         
