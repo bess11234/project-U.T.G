@@ -697,7 +697,7 @@ def tower(object, choice):
 def main_story():
     """main story"""
     os.system("cls")
-    os.system("chcp 874")
+    os.system("chcp 65001")
     choice = ""
     print("\n\033[0;34;40m***กดปุ่ม Esc เพื่อ Skip***\n\033[0;0;0m")
     typing("ณ โลกที่แสนสงบสุข ได้มีวิญญาณร้ายกลายร่างเสกหอคอยแห่งความชั่วร้ายขึ้นมาหวังที่จะทำลายร้างโลกทิ้งไป")
