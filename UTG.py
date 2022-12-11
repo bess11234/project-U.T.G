@@ -595,7 +595,6 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
         weapon_rate = "Inwza007"
     else:
         weapon_rate = "Normal"
-    level = 51
 
     power_player_items(weapon_status, weapon_rate, stack_weapon)
 
@@ -748,7 +747,16 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
         typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "For the sake that I pity you I\'ll tell something good."\n')
         typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "During the moment you choose a weapon cast a \033[0;49;33m\'uuddlrlrab\'\033[0;0;0m and see it will bring a fortune."\n')
         typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "Hah Ha Ha Ha Hah Ha Ha Ha Ha"\n')
-        print("\n"+"-"*24)
+        print("\n"+"-"*24+"\n")
+        print("1 : New Game\n2 : Quit")
+        choice = input("Select Option : ")
+        if choice == "1":
+            print("1 : Sword\n2 : Magic Book")
+            choice = input("Select Weapon : ")
+            weapon_name = "Sword"*(choice == "1")+"Magic Book"*(choice == "2")
+            weapon_status = weapon[weapon_name]
+            Player['hp'], Player['max_hp'], Player['max_mp'], Player['mp'], Player['str'], Player['agi'], Player['int'] = 10, 10, 10, 10, 10, 10, 10
+            inside_tower(1, weapon_status, 1, weapon_name, 2, 0, 0, {"HP potion" : 1, "MP potion" : 1}, 0, 0)
     return
 
 def tower(object, choice):
@@ -764,6 +772,7 @@ def tower(object, choice):
     if object == "9 mm Magic Gun":
         weapon_name = "9 mm Magic Gun"
         object = weapon_secret[weapon_name].copy()
+
     stack_newgame = 0
     stack_mon, stack_weapon = 0, 0
     player_item = {"HP potion" : 1, "MP potion" : 1}
