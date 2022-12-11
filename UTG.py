@@ -589,14 +589,15 @@ def power_mon(mon, status_mon, stack, mon_type):
         mon_type = "       "
     return mon.strip(), mon_type
 
-def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_mon, stack_weapon, player_item, point_player, stack_newgame):
+def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_mon, stack_weapon, player_item, point_player, stack_newgame_mon, stack_newgame_player, weapon_rate):
     """tower"""
     if weapon_name == "9 mm Magic Gun":
         weapon_rate = "Inwza007"
-    else:
+    elif weapon_rate == "":
         weapon_rate = "Normal"
-
-    power_player_items(weapon_status, weapon_rate, stack_weapon)
+        
+    if stack_newgame_mon == 0:
+        power_player_items(weapon_status, weapon_rate, stack_weapon)
 
     while level != 51:
         tmp_level = ""
@@ -611,7 +612,7 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
         status_mon = Monster[mon].copy()
         status_player = Player.copy()
 
-        stack_mon += 1 + level//10 #ถ้าจะฟาร์มต่อจะไม่บวกเพิ่ม
+        stack_mon += 1 + level//10 + stack_newgame_mon #ถ้าจะฟาร์มต่อจะไม่บวกเพิ่ม
         if level%10 == 0:
             mon_type = "Boss"
         elif level%5 == 0:
@@ -707,7 +708,7 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
         level += 1
         Player["max_hp"] += 5
         Player["hp"] += 5
-        point_player += 3
+        point_player += 3+stack_newgame_player
 
     if level == 51 and weapon_name == "9 mm Magic Gun":
         os.system("cls")
@@ -734,8 +735,9 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
         print("1 : New Game+\n2 : Quit")
         choice = input("Select Option : ")
         if choice == "1":
-            stack_newgame += 5
-            inside_tower(1, weapon_status, 1, weapon_name, unlock_skill, stack_mon, stack_weapon, player_item, point_player, stack_newgame)
+            stack_newgame_mon += 1
+            stack_newgame_player += 2
+            inside_tower(1, weapon_status, 1, weapon_name, unlock_skill, stack_mon, stack_weapon, player_item, point_player, stack_newgame_mon, stack_newgame_player, weapon_rate)
     else:
         os.system("cls")
         print("-"*24+"\n")
@@ -756,7 +758,7 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
             weapon_name = "Sword"*(choice == "1")+"Magic Book"*(choice == "2")
             weapon_status = weapon[weapon_name]
             Player['hp'], Player['max_hp'], Player['max_mp'], Player['mp'], Player['str'], Player['agi'], Player['int'] = 10, 10, 10, 10, 10, 10, 10
-            inside_tower(1, weapon_status, 1, weapon_name, 2, 0, 0, {"HP potion" : 1, "MP potion" : 1}, 0, 0)
+            inside_tower(1, weapon_status, 1, weapon_name, 2, 0, 0, {"HP potion" : 1, "MP potion" : 1}, 0, 0, 0, "")
     return
 
 def tower(object, choice):
@@ -773,12 +775,12 @@ def tower(object, choice):
         weapon_name = "9 mm Magic Gun"
         object = weapon_secret[weapon_name].copy()
 
-    stack_newgame = 0
+    stack_newgame_mon, stack_newgame_player = 0, 0
     stack_mon, stack_weapon = 0, 0
     player_item = {"HP potion" : 1, "MP potion" : 1}
     point_player = 0
 
-    inside_tower(level, object, choice, weapon_name, 2, stack_mon, stack_weapon, player_item, point_player, stack_newgame)
+    inside_tower(level, object, choice, weapon_name, 2, stack_mon, stack_weapon, player_item, point_player, stack_newgame_mon, stack_newgame_player, "")
 
 def main_story():
     """main story"""
