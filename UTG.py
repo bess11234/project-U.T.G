@@ -143,7 +143,6 @@ def use_item(status_player, player_item, guide=0, tmp=0):
                 return 1
 
         elif (use == "1" or use == "2") and (player_item['HP potion'] == 0 or  player_item['MP potion'] == 0):
-            os.system("cls")
             print("\033[0;49;90m**You have no Potion HP**\033[0;0;0m"*(use == "1")+"\033[0;49;90m**You have no Potion MP**\033[0;0;0m"*(use == "2"))
             typing("-"*24+"\n")
 
@@ -153,7 +152,6 @@ def use_item(status_player, player_item, guide=0, tmp=0):
             break
 
         else:
-            os.system("cls")
             print("\033[0;49;90m**Wrong Option**\033[0;0;0m")
             typing("-"*24+"\n")
     return 0
@@ -183,8 +181,7 @@ def use_skill(status_player, weapon_status, tmp_skill, unlock_skill):
             os.system('cls')
             return "Back"
         else:
-            print("\nWrong Skill")
-            os.system('cls')
+            print("\033[0;49;90m**Wrong Skill**\033[0;0;0m")
             typing("-"*24+"\n\n")
     
 
@@ -236,8 +233,9 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                             atk_player += tmp_skill[action][3]*status_player["str"]
                         if tmp_skill[action][4] == "i":
                             atk_player += tmp_skill[action][3]*status_player["int"]
-                        status_mon['hp'] -= int(atk_player)
-                        action = "\033[1;49;34m"+tmp_skill[action][0]+"\033[0;0;0m"
+                        atk_player = random.randrange(int(atk_player), int(atk_player)+10)
+                        status_mon['hp'] -= atk_player
+                        action = "\033[1;49;36m"+tmp_skill[action][0]+"\033[0;0;0m"
                     os.system('cls')
                     typing("-"*24+"\n")
 
@@ -257,7 +255,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                 typing("\n"+"-"*24)
 
                 if status_mon['hp'] <= 0:
-                    typing("""\n\nYou\033[0;49;31m kill\033[0;0;0m %s \033[0;49;31malready!!\033[0;0;0m\n\n"""%mon)
+                    typing("""\n\n%s has been \033[0;49;31killed.\033[0;0;0m\n\n"""%mon)
                     #***********สุุ่มพวกอาวุธ สุ่ม potion ที่จะได้**********
                     drop = re_potion()
                     for i in drop:
@@ -283,7 +281,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
             if action == 2:
                 tmp_skill = mon_use_skill(status_mon, unlock_skill)
                 if tmp_skill != [None]:
-                    action = "\033[2;49;31m"+tmp_skill[0]+"\033[0;0;0m"
+                    action = "\033[1;49;36m"+tmp_skill[0]+"\033[0;0;0m"
                     atk_mon = tmp_skill[1][0]
                     status_mon["mp"] -= tmp_skill[1][1]
                     if tmp_skill[1][3] == "s":
@@ -354,14 +352,15 @@ def tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_p
         typing("\n"+"-"*24+"\n\n")
 
         if level == 1:
-            typing("%s : Hmnh... Strange I thought I feel the power but you're not the returnee? if so, I'll teach you since I see that you have a glimpse.\n"%god)
-            typing("%s : Alright, you've entered the 1st floor, try fighting that monster to advance to the next floor!!!\n"%god)
+            typing("%s : \"Hmnh... Strange I thought I feel the power but you're not the returnee? if so, I'll teach you since I see that you have a glimpse.\"\n"%god)
+            typing("%s : \"Alright, you've entered the 1st floor, try fighting that monster to advance to the next floor!!!\"\n"%god)
             print()
         if level == 5:
-            typing("%s : Huh.. you've already reached 5th floor, my hunch was right. You could careful every 5th floor, you will encounter \033[1;36;40mMini-Boss\033[0;0;0m and every 10th floor, you will encounter \033[1;31;40mBoss.\033[0;0;0m\n"%god)
-            typing("%s : Be ready before you go.\n"%god)
+            typing("%s : \"Huh.. you've already reached 5th floor, my hunch was right. You could careful every 5th floor, you will encounter \033[1;36;40mMini-Boss\033[0;0;0m and every 10th floor, you will encounter \033[1;31;40mBoss.\033[0;0;0m\"\n"%god)
+            typing("%s : \"And after you kill the \033[1;31;40mBoss\033[0;0;0m, you'll unlock a \033[0;49;36mnew skill\033[0;0;0m for your weapon.\"\n")
+            typing("%s : \"Be ready before you go.\"\n"%god)
         if level == 10:
-            typing("%s : I hope you could detroy tower this time... There's nothing that I can teach you. Careful about \033[1;31;40mBoss\033[0;0;0m. I bless you\n"%god)
+            typing("%s : \"I hope you could detroy tower this time... There's nothing that I can teach you. Careful about \033[1;31;40mBoss\033[0;0;0m. I bless you\"\n"%god)
 
         status_player = Player.copy()
         power_player(status_player, weapon_status)
@@ -449,7 +448,7 @@ def choices_player(status_player, point_player, player_item, weapon_status, weap
             point_player, status_player = upgrade_pointplayer(point_player, status_player, weapon_status, weapon_rate, stack_weapon, guide)
 
         else:
-            print("\033[0;49;90m\n**Wrong Option**\033[0;0;0m")
+            print("\033[0;49;90m**Wrong Option**\033[0;0;0m")
             typing("-"*24+"\n\n")
 
 def upgrade_pointplayer(point_player, status_player, weapon_status, weapon_rate, stack_weapon, guide=0):
@@ -626,13 +625,13 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
         power_player(status_player, weapon_status)
         
         if str(level)[-1] == "1":
-            tmp_level = str(level)+"st"
+            tmp_level = str(level+50*stack_newgame_mon)+"st"
         elif str(level)[-1] == "2":
-            tmp_level = str(level)+"nd"
+            tmp_level = str(level+50*stack_newgame_mon)+"nd"
         elif str(level)[-1] == "3":
-            tmp_level = str(level)+"rd"
+            tmp_level = str(level+50*stack_newgame_mon)+"rd"
         else:
-            tmp_level = str(level)+"th"
+            tmp_level = str(level+50*stack_newgame_mon)+"th"
 
         if status_player["hp"] <= 0:
             break
@@ -710,7 +709,26 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
         Player["hp"] += 5
         point_player += 3+stack_newgame_player
 
-    if level == 51 and weapon_name == "9 mm Magic Gun":
+    if stack_newgame_mon != 0 and status_player['hp'] > 0:
+        os.system("cls")
+        print("-"*24+"\n")
+        typing('''%s : "Even if you keep destroying tower. There's no reward for you, you know?\n"'''%god)
+        while True:
+            print("-"*24+"\n")
+            print("1 : New Game+\n2 : Quit")
+            choice = input("Select Option : ")
+            if choice == "1":
+                stack_newgame_mon += 1
+                stack_newgame_player += 2
+                break
+            elif choice == "2":
+                break
+            else:
+                typing("\n\033[0;49;90m**Wrong Option**\033[0;0;0m")
+        if choice == "1":
+            inside_tower(1, weapon_status, 1, weapon_name, unlock_skill, stack_mon, stack_weapon, player_item, point_player, stack_newgame_mon, stack_newgame_player, weapon_rate)
+
+    elif level == 51 and weapon_name == "9 mm Magic Gun":
         os.system("cls")
         print("-"*24+"\n")
         typing("You have destroyed the tower.\n")
@@ -730,13 +748,20 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
         typing("You returned to town for the 3 wishes from The King.\
         \nBut as you going to the town, there is no more that town.\nBecause the time between tower and outside not equal.\
         \nWhen you conquer the tower, 1000 years have already passed.\nHow does the story conclude?\n")
-        print("\n"+"-"*24+"\n")
-        typing("To be continue\n")
-        print("1 : New Game+\n2 : Quit")
-        choice = input("Select Option : ")
+        typing("\nTo be continue\n")
+        while True:
+            print("\n"+"-"*24+"\n")
+            print("1 : New Game+\n2 : Quit")
+            choice = input("Select Option : ")
+            if choice == "1":
+                stack_newgame_mon += 1
+                stack_newgame_player += 2
+                break
+            elif choice == "2":
+                break
+            else:
+                typing("\n\033[0;49;90m**Wrong Option**\033[0;0;0m")
         if choice == "1":
-            stack_newgame_mon += 1
-            stack_newgame_player += 2
             inside_tower(1, weapon_status, 1, weapon_name, unlock_skill, stack_mon, stack_weapon, player_item, point_player, stack_newgame_mon, stack_newgame_player, weapon_rate)
     else:
         os.system("cls")
@@ -748,17 +773,25 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
         typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "Poor lost lamb, what a limp and wistful you are."\n')
         typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "For the sake that I pity you I\'ll tell something good."\n')
         typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "During the moment you choose a weapon cast a \033[0;49;33m\'uuddlrlrab\'\033[0;0;0m and see it will bring a fortune."\n')
-        typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "Hah Ha Ha Ha Hah Ha Ha Ha Ha"\n')
-        print("\n"+"-"*24+"\n")
-        print("1 : New Game\n2 : Quit")
-        choice = input("Select Option : ")
-        if choice == "1":
-            print("1 : Sword\n2 : Magic Book")
-            choice = input("Select Weapon : ")
-            weapon_name = "Sword"*(choice == "1")+"Magic Book"*(choice == "2")
-            weapon_status = weapon[weapon_name]
-            Player['hp'], Player['max_hp'], Player['max_mp'], Player['mp'], Player['str'], Player['agi'], Player['int'] = 10, 10, 10, 10, 10, 10, 10
-            inside_tower(1, weapon_status, 1, weapon_name, 2, 0, 0, {"HP potion" : 1, "MP potion" : 1}, 0, 0, 0, "")
+        typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "Hah Ha Ha Ha Hah Ha Ha Ha Ha."\n')
+        while True:
+            print("\n"+"-"*24+"\n")
+            print("1 : New Game\n2 : Quit")
+            choice = input("Select Option : ")
+            if choice == "1":
+                print("\n"+"-"*24)
+                print("\n1 : Sword\n2 : Magic Book")
+                choice2 = input("Select Weapon : ")
+                weapon_name = "Sword"*(choice2 == "1")+"Magic Book"*(choice2 == "2")
+                if choice2 not in ("1", "2"):
+                    continue
+                weapon_status = weapon[weapon_name]
+                Player['hp'], Player['max_hp'], Player['max_mp'], Player['mp'], Player['str'], Player['agi'], Player['int'] = 10, 10, 10, 10, 10, 10, 10
+                inside_tower(1, weapon_status, 1, weapon_name, 2, 0, 0, {"HP potion" : 1, "MP potion" : 1}, 0, 0, 0, "")
+            elif choice == "2":
+                break
+            else:
+                typing("\n\033[0;49;90m**Wrong Option**\033[0;0;0m")
     return
 
 def tower(object, choice):
@@ -794,6 +827,7 @@ def main_story():
     typing("\n\nWhat is your weapon?")
     print("\n1 : Old Sword\n2 : Dirty Magic Book")
     while True:
+        print("-"*24)
         choice = input("Select Weapon : ").strip()
         if choice == "1":
             weapon = "Old Sword"
@@ -806,8 +840,8 @@ def main_story():
             print("""You use a packet of one who returned
 %s feel pathetic in you."""%god)
             break
-        elif choice != "":
-            print("Hey that not in option!!!\n")
+        else:
+            print("\033[0;49;90mHey that not in option!!!\033[0;0;0m")
     typing("-"*24+"\n")
     #บอกชื่อและถามว่าจะข้ามบทฝึกสอนรึเปล่า
     typing("\nYou were the one who was about to enter the tower when suddenly a voice came in your head.")
@@ -825,6 +859,7 @@ def main_story():
         print("1 : Yes, I am!!! (\033[0;36;40mHave played\033[0;0;0m)\n2 : No (\033[0;36;40mNever played\033[0;0;0m)\n3 : Leave the tower")
 
     while True:
+        print("-"*24)
         choice = input("Select Choice : ").strip()
         if choice == "1":
             break
@@ -833,10 +868,10 @@ def main_story():
         elif choice == "3":
             break
         else:
-            print("Hey We don't do that here!!!\n")
+            print("\033[0;49;90mHey We don't do that here!!!\033[0;0;0m")
     if choice == "3":
-        print("so long.")
+        print("So long.")
         return
-    typing("\n"+"-"*24+"\n\n")
+    typing("-"*24+"\n\n")
     tower(weapon, choice)
 main_story()
