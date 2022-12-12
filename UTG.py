@@ -787,11 +787,13 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
                     continue
                 weapon_status = weapon[weapon_name]
                 Player['hp'], Player['max_hp'], Player['max_mp'], Player['mp'], Player['str'], Player['agi'], Player['int'] = 10, 10, 10, 10, 10, 10, 10
-                inside_tower(1, weapon_status, 1, weapon_name, 2, 0, 0, {"HP potion" : 1, "MP potion" : 1}, 0, 0, 0, "")
+                break
             elif choice == "2":
                 break
             else:
                 typing("\n\033[0;49;90m**Wrong Option**\033[0;0;0m")
+        if choice == "1":
+            inside_tower(1, weapon_status, 1, weapon_name, 2, 0, 0, {"HP potion" : 1, "MP potion" : 1}, 0, 0, 0, "")
     return
 
 def tower(object, choice):
