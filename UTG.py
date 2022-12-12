@@ -124,7 +124,7 @@ def use_item(status_player, player_item, guide=0, tmp=0):
             player_item['HP potion'] -= 1
             os.system("cls")
             typing("-"*24+"\n")
-            print("\nYou use Potion HP recovery \033[0;49;31m%d\033[0;0;0m\n"%(status_player['max_hp']*25//100))
+            print("\n%s use Potion HP recovery \033[0;49;31m%d\033[0;0;0m\n"%(Player['name'], (status_player['max_hp']*25//100)))
             typing("-"*24+"\n")
             fixed(status_player)
             if tmp == 1:
@@ -136,7 +136,7 @@ def use_item(status_player, player_item, guide=0, tmp=0):
             player_item['MP potion'] -= 1
             os.system("cls")
             typing("-"*24+"\n")
-            print("\nYou use Potion MP recovery \033[0;49;34m%d\033[0;0;0m\n"%(status_player['max_mp']*20//100))
+            print("\n%s use Potion MP recovery \033[0;49;34m%d\033[0;0;0m\n"%(Player['name'],(status_player['max_mp']*20//100)))
             typing("-"*24+"\n")
             fixed(status_player)
             if tmp == 1:
@@ -213,7 +213,6 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                 print("3 : Open Inventory"+" (\033[0;36;40mUse Potion to recovery \033[0;49;31mHP\033[0;0;0m \033[0;36;40mor \033[0;49;34mMP\033[0;0;0m)"*guide+"\n\033[0;49;90m**Using each option will cost you a number of your turn.**\033[0;0;m"*guide+"\n")
                 typing("-"*24+"\n")
                 action = input("Select Option : ").strip()
-                typing("-"*24+"\n")
 
                 if action == "1":
                     os.system('cls')
@@ -222,6 +221,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                     status_mon['hp'] -= atk_player
 
                 elif action == "2":
+                    typing("-"*24+"\n")
                     tmp_skill = {}
                     action = use_skill(status_player, weapon_status, tmp_skill, unlock_skill)
                     if action == "Back":
@@ -247,7 +247,7 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                         continue
 
                 else:
-                    print("\033[0;49;90m\n**Wrong Option**\n\033[0;0;0m")
+                    print("\033[0;49;90m**Wrong Option**\033[0;0;0m")
                     typing("-"*24)
                     continue
 
@@ -255,11 +255,11 @@ def fighting(mon, status_player, status_mon, weapon_status, player_item, unlock_
                 typing("\n"+"-"*24)
 
                 if status_mon['hp'] <= 0:
-                    typing("""\n\n%s has been \033[0;49;31killed.\033[0;0;0m\n\n"""%mon)
+                    typing("""\n\n%s has been \033[0;49;31mkilled\033[0;0;0m.\n\n"""%mon)
                     #***********สุุ่มพวกอาวุธ สุ่ม potion ที่จะได้**********
                     drop = re_potion()
                     for i in drop:
-                        print("You obtain %s"%i)
+                        print("%s obtain %s"%(Player['name'], i))
                         if i == "Potion HP":
                             item = climage.convert('item\\blood_potion.png', is_unicode=True, width=15)
                             player_item["HP potion"] += 1
@@ -580,7 +580,7 @@ def power_mon(mon, status_mon, stack, mon_type):
         status_mon['str'] += status_mon['str']*50//100
         status_mon['agi'] += status_mon['agi']*50//100
         status_mon['int'] += status_mon['int']*50//100
-        mon_type = "\033[1;36;40m"+mon_type+"\033[0;0;0m"
+        mon_type = "\033[1;49;34m"+mon_type+"\033[0;0;0m"
 
     if mon_type != "":
         mon = mon_type+" "+mon
@@ -769,7 +769,7 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
         print("\033[0;49;31m", end="")
         typing("Game Over\n")
         print("\033[0;0;0m", end="")
-        typing("You died on the %s floor\n\n"%tmp_level)
+        typing("%s died on the %s floor\n\n"%(Player['name'], tmp_level))
         typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "Poor lost lamb, what a limp and wistful you are."\n')
         typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "For the sake that I pity you I\'ll tell something good."\n')
         typing('\033[0;35;40mMysterious Voice\033[0;0;0m : "During the moment you choose a weapon cast a \033[0;49;33m\'uuddlrlrab\'\033[0;0;0m and see it will bring a fortune."\n')
@@ -782,10 +782,9 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
                 print("\n"+"-"*24)
                 print("\n1 : Sword\n2 : Magic Book")
                 choice2 = input("Select Weapon : ")
-                weapon_name = "Sword"*(choice2 == "1")+"Magic Book"*(choice2 == "2")
+                weapon_name = "Old Sword"*(choice2 == "1")+"Dirty Magic Book"*(choice2 == "2")
                 if choice2 not in ("1", "2"):
                     continue
-                weapon_status = weapon[weapon_name]
                 Player['hp'], Player['max_hp'], Player['max_mp'], Player['mp'], Player['str'], Player['agi'], Player['int'] = 10, 10, 10, 10, 10, 10, 10
                 break
             elif choice == "2":
@@ -793,7 +792,7 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
             else:
                 typing("\n\033[0;49;90m**Wrong Option**\033[0;0;0m")
         if choice == "1":
-            inside_tower(1, weapon_status, 1, weapon_name, 2, 0, 0, {"HP potion" : 1, "MP potion" : 1}, 0, 0, 0, "")
+            tower(weapon_name, choice)
     return
 
 def tower(object, choice):
