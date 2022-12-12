@@ -46,9 +46,9 @@ potion_drop = ["Potion HP", "Potion HP", "Potion HP", "Potion MP", "Potion MP", 
 legen_drop = ["The Stick of Truth", "The Drill of Rule"]
 weapon_drop = ["Sword", "Rapier", "Magic Book", "Spear", "Giant Sword", "Three Sword", "Holy Staff", "Magic Lamp", "Magic Wand", "Holy Bomb"]
 
-weapon_legendary = {"The Stick of Truth":{"str": 1000, "int": 1000, "agi": 50, "skill":{"Shinjitsuwa itsumo hitotsu!": (1000, 2, 5, "i")}}, 
-                    "The Drill of Rule":{"str": 1000, "int": 1000, "agi": 60, "skill":{"Break The Seal!": (1200, 1, 5, "s")}}, "":""}
-weapon_secret = {"9 mm Magic Gun":{"str": 2000, "int": 2000, "agi": 20, "skill":{"This is the best solution": (2000, 1, 5, "i")}}}
+weapon_legendary = {"The Stick of Truth":{"str": 1000, "int": 1000, "agi": 1000, "skill":{"Shinjitsuwa itsumo hitotsu!": (1000, 2, 5, "i")}}, 
+                    "The Drill of Rule":{"str": 1000, "int": 1000, "agi": 1000, "skill":{"Break The Seal!": (1200, 1, 5, "s")}}, "":""}
+weapon_secret = {"9 mm Magic Gun":{"str": 2000, "int": 2000, "agi": 2000, "skill":{"This is the best solution": (2000, 1, 5, "i")}}}
 weapon = {"Sword": {"str": 5, "int": 0, "agi": 3, "skill": {"Slash Straight": (4, 5, 1.1, "s"), "Wind Slash": (16, 5, 1.5, "s"), "Berserk Slash": (35, 10, 2, "s"), "Asura Slash": (300, 50, 3, "s")}}, 
               "Spear": {"str": 6, "int": 0, "agi": 4, "skill": {"Pierce Straight": (4, 5, 1.1, "s"), "Pierce!": (16, 10, 1.5, "s"), "Wind Spin": (50, 15, 2, "s"), "Helicopter!": (350, 40, 3, "s")}}, 
               "Rapier": {"str": 3, "int": 0, "agi": 9, "skill": {"Yok": (2, 5, 1.1, "s"), "Shit!": (19, 4, 1.5, "s"), "Juwang": (60, 30, 2, "s"), "Tank!": (350, 50, 3, "s")}}, 
