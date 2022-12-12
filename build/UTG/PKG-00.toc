@@ -1,4 +1,4 @@
-('D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-16 - '
+('D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-17 - '
  'English\\build\\UTG\\UTG.pkg',
  {'BINARY': 1,
   'DATA': 1,
@@ -9,27 +9,27 @@
   'PYZ': 0,
   'SPLASH': 1},
  [('PYZ-00.pyz',
-   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-16 - '
+   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-17 - '
    'English\\build\\UTG\\PYZ-00.pyz',
    'PYZ'),
   ('struct',
-   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-16 - '
+   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-17 - '
    'English\\build\\UTG\\localpycs\\struct.pyc',
    'PYMODULE'),
   ('pyimod01_archive',
-   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-16 - '
+   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-17 - '
    'English\\build\\UTG\\localpycs\\pyimod01_archive.pyc',
    'PYMODULE'),
   ('pyimod02_importers',
-   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-16 - '
+   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-17 - '
    'English\\build\\UTG\\localpycs\\pyimod02_importers.pyc',
    'PYMODULE'),
   ('pyimod03_ctypes',
-   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-16 - '
+   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-17 - '
    'English\\build\\UTG\\localpycs\\pyimod03_ctypes.pyc',
    'PYMODULE'),
   ('pyimod04_pywin32',
-   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-16 - '
+   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-17 - '
    'English\\build\\UTG\\localpycs\\pyimod04_pywin32.pyc',
    'PYMODULE'),
   ('pyiboot01_bootstrap',
@@ -48,7 +48,7 @@
    'C:\\Users\\bess1123\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgutil.py',
    'PYSOURCE'),
   ('UTG',
-   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-16 - English\\UTG.py',
+   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-17 - English\\UTG.py',
    'PYSOURCE'),
   ('python311.dll',
    'C:\\Users\\bess1123\\AppData\\Local\\Programs\\Python\\Python311\\python311.dll',
@@ -101,21 +101,33 @@
   ('PIL._imaging',
    'C:\\Users\\bess1123\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\_imaging.cp311-win_amd64.pyd',
    'EXTENSION'),
-  ('libssl-1_1.dll',
-   'C:\\Users\\bess1123\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\libssl-1_1.dll',
-   'BINARY'),
   ('libcrypto-1_1.dll',
    'C:\\Users\\bess1123\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\libcrypto-1_1.dll',
+   'BINARY'),
+  ('libssl-1_1.dll',
+   'C:\\Users\\bess1123\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\libssl-1_1.dll',
    'BINARY'),
   ('libffi-8.dll',
    'C:\\Users\\bess1123\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\libffi-8.dll',
    'BINARY'),
   ('base_library.zip',
-   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-16 - '
+   'D:\\Video\\KMITL\\ปี 1\\Project U.T.G\\project-U.T.G-17 - '
    'English\\build\\UTG\\base_library.zip',
+   'DATA'),
+  ('climage-0.1.3.dist-info\\REQUESTED',
+   'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\REQUESTED',
+   'DATA'),
+  ('climage-0.1.3.dist-info\\INSTALLER',
+   'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\INSTALLER',
+   'DATA'),
+  ('climage-0.1.3.dist-info\\RECORD',
+   'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\RECORD',
    'DATA'),
   ('climage-0.1.3.dist-info\\LICENSE',
    'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\LICENSE',
+   'DATA'),
+  ('climage-0.1.3.dist-info\\entry_points.txt',
+   'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\entry_points.txt',
    'DATA'),
   ('climage-0.1.3.dist-info\\WHEEL',
    'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\WHEEL',
@@ -123,20 +135,8 @@
   ('climage-0.1.3.dist-info\\top_level.txt',
    'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\top_level.txt',
    'DATA'),
-  ('climage-0.1.3.dist-info\\INSTALLER',
-   'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\INSTALLER',
-   'DATA'),
-  ('climage-0.1.3.dist-info\\entry_points.txt',
-   'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\entry_points.txt',
-   'DATA'),
   ('climage-0.1.3.dist-info\\METADATA',
    'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\METADATA',
-   'DATA'),
-  ('climage-0.1.3.dist-info\\REQUESTED',
-   'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\REQUESTED',
-   'DATA'),
-  ('climage-0.1.3.dist-info\\RECORD',
-   'c:\\users\\bess1123\\appdata\\local\\programs\\python\\python311\\lib\\site-packages\\climage-0.1.3.dist-info\\RECORD',
    'DATA')],
  False,
  False,
