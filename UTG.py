@@ -782,8 +782,8 @@ def inside_tower(level, weapon_status, choice, weapon_name, unlock_skill, stack_
                 print("\n"+"-"*24)
                 print("\n1 : Sword\n2 : Magic Book")
                 choice2 = input("Select Weapon : ")
-                weapon_name = "Old Sword"*(choice2 == "1")+"Dirty Magic Book"*(choice2 == "2")
-                if choice2 not in ("1", "2"):
+                weapon_name = "Old Sword"*(choice2 == "1")+"Dirty Magic Book"*(choice2 == "2")+"9 mm Magic Gun"*(choice2 == "uuddlrlrab")
+                if choice2 not in ("1", "2", "uuddlrlrab"):
                     continue
                 Player['hp'], Player['max_hp'], Player['max_mp'], Player['mp'], Player['str'], Player['agi'], Player['int'] = 10, 10, 10, 10, 10, 10, 10
                 break
