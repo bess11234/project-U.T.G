@@ -44,7 +44,7 @@ rate_drop = ["Poor", "Normal", "Normal", "Normal", "Normal", "Normal", "Rare", "
 #ถ้ามีเวลาค่อยใส่ของกวนๆ
 potion_drop = ["Potion HP", "Potion HP", "Potion HP", "Potion MP", "Potion MP", "Potion MP", "The shattered glasses of the creator", "The shattered glasses of the creator", "The shattered glasses of the creator", "The shattered glasses of the creator"] #, "ลุงตูบที่อยู่บ้านข้างๆ", "กระป๋องน้ำซ่าชื่นใจ", "ความรักที่คุณให้เขาไปแต่เขาไม่ให้เคยให้อะไรกลับมา"
 legen_drop = ["The Stick of Truth", "The Drill of Rule"]
-weapon_drop = ["Sword", "Rapier", "Magic Book", "Spear", "Giant Sword", "Three Sword", "Magic Staff", "Magic Lamp", "Magic Wand", "Magic Bomb"]
+weapon_drop = ["Sword", "Rapier", "Magic Book", "Spear", "Giant Sword", "Three Sword", "Holy Staff", "Magic Lamp", "Magic Wand", "Holy Bomb"]
 
 weapon_legendary = {"The Stick of Truth":{"str": 1000, "int": 1000, "agi": 50, "skill":{"Shinjitsuwa itsumo hitotsu!": (1000, 2, 5, "i")}}, 
                     "The Drill of Rule":{"str": 1000, "int": 1000, "agi": 60, "skill":{"Break The Seal!": (1200, 1, 5, "s")}}, "":""}
@@ -357,7 +357,7 @@ def tutorial(level, weapon_status, stack_mon, stack_weapon, player_item, point_p
             print()
         if level == 5:
             typing("%s : \"Huh.. you've already reached 5th floor, my hunch was right. You could careful every 5th floor, you will encounter \033[1;36;40mMini-Boss\033[0;0;0m and every 10th floor, you will encounter \033[1;31;40mBoss.\033[0;0;0m\"\n"%god)
-            typing("%s : \"And after you kill the \033[1;31;40mBoss\033[0;0;0m, you'll unlock a \033[0;49;36mnew skill\033[0;0;0m for your weapon.\"\n")
+            typing("%s : \"And after you kill the \033[1;31;40mBoss\033[0;0;0m, you'll unlock a \033[0;49;36mnew skill\033[0;0;0m for your weapon.\"\n"%god)
             typing("%s : \"Be ready before you go.\"\n"%god)
         if level == 10:
             typing("%s : \"I hope you could detroy tower this time... There's nothing that I can teach you. Careful about \033[1;31;40mBoss\033[0;0;0m. I bless you\"\n"%god)
