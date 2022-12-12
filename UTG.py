@@ -51,14 +51,14 @@ weapon_legendary = {"The Stick of Truth":{"str": 1000, "int": 1000, "agi": 50, "
 weapon_secret = {"9 mm Magic Gun":{"str": 2000, "int": 2000, "agi": 20, "skill":{"This is the best solution": (2000, 1, 5, "i")}}}
 weapon = {"Sword": {"str": 5, "int": 0, "agi": 3, "skill": {"Slash Straight": (4, 5, 1.1, "s"), "Wind Slash": (16, 5, 1.5, "s"), "Berserk Slash": (35, 10, 2, "s"), "Asura Slash": (300, 50, 3, "s")}}, 
               "Spear": {"str": 6, "int": 0, "agi": 4, "skill": {"Pierce Straight": (4, 5, 1.1, "s"), "Pierce!": (16, 10, 1.5, "s"), "Wind Spin": (50, 15, 2, "s"), "Helicopter!": (350, 40, 3, "s")}}, 
-              "Rapier": {"str": 3, "int": 0, "agi": 9, "skill": {"Lift": (2, 5, 1.1, "s"), "Quick": (19, 4, 1.5, "s"), "Poke": (60, 30, 2, "s"), "Spike!": (350, 50, 3, "s")}}, 
+              "Rapier": {"str": 3, "int": 0, "agi": 9, "skill": {"Yok": (2, 5, 1.1, "s"), "Shit!": (19, 4, 1.5, "s"), "Juwang": (60, 30, 2, "s"), "Tank!": (350, 50, 3, "s")}}, 
               "Giant Sword": {"str": 10, "int": 0, "agi": -1, "skill": {"Savage Slash Straight!": (6, 5, 1.1, "s"), "Slap Flit": (25, 15, 1.5, "s"), "Stomp Break": (70, 30, 2, "s"), "Break Earth": (500, 150, 3, "s")}}, 
-              "Three Sword": {"str": 8, "int": 0, "agi": 5, "skill": {"Three Sword Style : Slash": (5, 5, 1.1, "s"), "Three Sword Style : Wind Slash": (15, 6, 1.5, "s"), "Three Sword Style : Wind Sword 36 form": (100, 40, 2, "s"), "Asura": (450, 120, 4, "s")}}, 
+              "Three Sword": {"str": 8, "int": 0, "agi": 5, "skill": {"Three Sword Style : Slash": (5, 5, 1.1, "s"), "Three Sword Style : Wind Slash": (15, 6, 1.5, "s"), "Three Sword Style : Wind Sword 36 form": (100, 40, 2, "s"), "Three Sword Style : Asura": (450, 120, 4, "s")}}, 
               "Magic Book": {"str": 0, "int": 5, "agi": 3, "skill": {"Fire Ball": (3, 5, 1.5, "i"), "Lightning Strike": (35, 25, 2, "i"), "Punishment of Darkness": (60, 60, 3, "i"), "Get Some Books!": (400, 125, 4, "i")}}, 
-              "Magic Staff": {"str": 0, "int": 10, "agi": -1, "skill": {"Enhance Staff and Slash!!": (4, 5, 1.5, "i"), "Wind Cut": (29, 11, 2, "i"), "Go to Hell!": (80, 70, 3, "i"), "In the name of Monday, I will punish you": (500, 150, 4, "i")}}, 
+              "Holy Staff": {"str": 0, "int": 10, "agi": -1, "skill": {"Enhance Staff and Slash!!": (4, 5, 1.5, "i"), "Wind Cut": (29, 11, 2, "i"), "Go to Hell!": (80, 70, 3, "i"), "In the name of Monday, I will punish you": (500, 150, 4, "i")}}, 
               "Magic Lamp": {"str": 0, "int": 7, "agi": 1, "skill": {"Magic of Light": (3, 5, 1.5, "i"), "Kameee hameeee haaaa!": (35, 15, 2, "i"), "Sealing Sword of Light": (75, 65, 3, "i"), "Genki Ball": (450, 125, 4, "i")}}, 
               "Magic Wand": {"str": 0, "int": 6, "agi": 7, "skill": {"Steel Inflammable": (4, 5, 1.5, "i"), "Wicked!": (50, 20, 2, "i"), "Expecto Patronum": (100, 65, 3, "i"), "Avada Kedavra": (499, 149, 4, "i")}}, 
-              "Magic Bomb": {"str": 0, "int": 8, "agi": 5, "skill": {"Cracker": (3, 5, 1.5, "i"), "Hand Bomb": (30, 21, 2, "i"), "TNT": (100, 60, 3, "i"), "Space and Time Bomb!": (499, 149, 4, "i")}}}
+              "Holy Bomb": {"str": 0, "int": 8, "agi": 5, "skill": {"Cracker": (3, 5, 1.5, "i"), "Hand Bomb": (30, 21, 2, "i"), "TNT": (100, 60, 3, "i"), "Space and Time Bomb!": (499, 149, 4, "i")}}}
 
 def re_item():
     """rate drop item"""
